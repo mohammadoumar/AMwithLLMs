@@ -1,0 +1,587 @@
+Running abstRCT_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit acc
+09/07/2024 13:07:23 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:21857
+09/07/2024 13:07:33 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 13:07:33 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 13:07:33 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 13:07:33 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 13:07:33 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 13:07:33 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 13:07:33 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 13:07:33 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_acc_train_neo.json...
+09/07/2024 13:07:39 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 13:07:39 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_acc_train_neo.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 49229, 1855, 5811, 3777, 304, 279, 1495, 439, 3060, 330, 46644, 1, 477, 330, 42562, 1082, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 3777, 4595, 11, 26549, 315, 3160, 220, 23, 11, 304, 2768, 4823, 3645, 25, 5324, 8739, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 8739, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 46644, 1, 477, 330, 42562, 1082, 3343, 4815, 14711, 5810, 374, 279, 8278, 1495, 25, 220, 11579, 43035, 15419, 449, 293, 950, 332, 66796, 11, 264, 2536, 3751, 71916, 7294, 438, 26252, 11, 574, 7863, 449, 2211, 55681, 11, 3060, 34933, 477, 6593, 11, 304, 6978, 449, 83920, 22891, 423, 17, 47447, 9572, 13, 763, 459, 1825, 11, 47341, 11, 92520, 1992, 9269, 11, 6978, 1051, 47341, 311, 6514, 449, 220, 1135, 14060, 293, 950, 332, 66796, 320, 77, 284, 220, 14052, 8, 3131, 7446, 477, 311, 2211, 55681, 320, 77, 284, 220, 14052, 705, 3060, 477, 14946, 72783, 477, 45719, 26127, 315, 342, 24332, 33830, 65802, 349, 1475, 220, 1591, 2919, 13, 26150, 41265, 37442, 1051, 3115, 311, 6514, 8060, 323, 16945, 8624, 33824, 323, 20237, 13, 82935, 1392, 5343, 3477, 315, 66303, 68370, 2315, 11, 47447, 15696, 11, 18516, 86805, 77854, 2508, 5856, 5178, 2704, 11, 6784, 11, 3260, 4282, 292, 8670, 11, 323, 4367, 315, 2324, 14847, 13, 578, 23369, 8250, 315, 15419, 574, 220, 2137, 5672, 369, 293, 950, 332, 66796, 88186, 6978, 323, 220, 2983, 5672, 369, 2211, 496, 660, 6978, 26, 6514, 8060, 10222, 304, 220, 4331, 4, 323, 220, 2983, 4, 323, 8624, 33824, 304, 220, 3391, 4, 323, 220, 1644, 13689, 15947, 16134, 1741, 16, 29, 31969, 6372, 46603, 2211, 55681, 369, 2225, 37442, 320, 47, 366, 477, 284, 220, 15, 13, 6726, 705, 449, 31397, 42338, 320, 65, 950, 332, 66796, 25, 936, 55681, 8, 315, 220, 16, 13, 4370, 320, 2721, 4, 12410, 10074, 510, 11487, 1145, 220, 16, 13, 972, 311, 220, 17, 13, 410, 8, 369, 892, 311, 6514, 8060, 323, 220, 16, 13, 21, 320, 2721, 4, 21351, 11, 220, 16, 13, 777, 311, 220, 17, 13, 868, 8, 369, 892, 311, 8624, 33824, 13, 694, 1741, 16, 1822, 1741, 17, 29, 5659, 279, 220, 16, 4771, 20237, 6492, 11, 279, 31397, 11595, 369, 19463, 315, 4648, 574, 220, 16, 13, 1682, 320, 2721, 4, 21351, 11, 220, 15, 13, 4161, 311, 220, 16, 13, 5332, 570, 694, 1741, 17, 1822, 1741, 18, 29, 14636, 3117, 11, 449, 264, 23369, 1833, 5352, 315, 220, 4218, 5672, 11, 23369, 20237, 706, 539, 1027, 8813, 304, 3060, 1912, 13, 694, 1741, 18, 1822, 1741, 19, 29, 29240, 505, 26954, 304, 3892, 4367, 315, 2324, 7482, 1051, 12207, 2204, 320, 47, 366, 477, 284, 220, 15, 13, 1721, 8, 1990, 6514, 5315, 48582, 505, 4038, 220, 16, 311, 220, 21, 11, 323, 682, 46603, 293, 950, 332, 66796, 13, 694, 1741, 19, 1822, 1741, 20, 29, 28993, 11, 279, 7294, 438, 26252, 574, 1664, 66441, 7863, 449, 2211, 55681, 26, 694, 1741, 20, 1822, 1741, 21, 29, 449, 293, 950, 332, 66796, 11, 4106, 18698, 288, 10222, 2753, 3629, 323, 17659, 8541, 29668, 323, 342, 1910, 66274, 561, 689, 810, 3629, 13, 694, 1741, 21, 1822, 1741, 22, 29, 10541, 264, 47040, 315, 220, 1135, 14060, 315, 293, 950, 332, 66796, 3131, 7446, 574, 539, 439, 7524, 439, 2211, 55681, 11, 694, 1741, 22, 1822, 1741, 23, 29, 279, 37849, 4367, 315, 2324, 20124, 323, 279, 3428, 39775, 315, 2536, 71, 494, 25180, 31959, 4455, 3493, 8125, 311, 15806, 293, 950, 332, 66796, 11, 439, 264, 3254, 37471, 8479, 11, 520, 5190, 35130, 13, 694, 1741, 23, 29, 128009, 128006, 78191, 128007, 271, 5018, 8739, 9962, 794, 4482, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 46644, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to classify each argument component in the text as either "Claim" or "Premise". You must return a list of argument component types, strictly of length 8, in following JSON format: {"component_types": ["component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)"]} where each element "component_type (str)" is replaced by either "Claim" or "Premise". 
+
+### Here is the abstract text:  Single-agent therapy with bicalutamide, a nonsteroidal antiandrogen, was compared with castration, either surgical or medical, in patients with untreated Stage D2 prostate cancer. In an open, randomized, multicenter trial, patients were randomized to treatment with 50 mg bicalutamide (n = 243) once daily or to castration (n = 243), either orchiectomy or depot injection of goserelin acetate every 28 days. Primary efficacy endpoints were times to treatment failure and objective disease progression and survival. Assessments included review of measurable metastases, prostate dimensions, Eastern Cooperative Oncology Group performance status, pain, analgesic requirements, and quality of life responses. The median duration of therapy was 39 weeks for bicalutamide-treated patients and 42 weeks for castrated patients; treatment failure occurred in 53% and 42% and disease progression in 43% and 33%, respectively.<AC1> Treatment effects favored castration for both endpoints (P < or = 0.002), with hazard ratios (bicalutamide:castration) of 1.54 (95% confidence interval [CI], 1.18 to 2.00) for time to treatment failure and 1.6 (95% CI, 1.19 to 2.15) for time to disease progression. </AC1><AC2> From the 1-year survival analysis, the hazard ratio for probability of death was 1.29 (95% CI, 0.96 to 1.72). </AC2><AC3> Thus far, with a median follow-up of 86 weeks, median survival has not been reached in either group. </AC3><AC4> Changes from baseline in several quality of life variables were significantly different (P < or = 0.01) between treatment groups periodically from months 1 to 6, and all favored bicalutamide. </AC4><AC5> Overall, the antiandrogen was well tolerated compared with castration; </AC5><AC6> with bicalutamide, hot flushes occurred less often and breast tenderness and gynecomastia more often. </AC6><AC7> Although a dosage of 50 mg of bicalutamide once daily was not as effective as castration, </AC7><AC8> the favorable quality of life outcomes and the low incidence of nonhormonal adverse events provide reasons to evaluate bicalutamide, as a single therapeutic agent, at higher doses. </AC8><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"component_types": ["Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Claim"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 8739, 9962, 794, 4482, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 46644, 93546, 128009]
+labels:
+{"component_types": ["Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Claim"]}<|eot_id|>
+09/07/2024 13:07:40 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 13:07:40 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 13:07:40 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 13:07:40 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 13:07:46 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 13:07:46 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 13:07:46 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 13:07:46 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 13:07:46 - INFO - llamafactory.model.model_utils.misc - Found linear modules: gate_proj,up_proj,v_proj,o_proj,q_proj,k_proj,down_proj
+09/07/2024 13:07:46 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 13:07:46 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 13:07:46 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 13:07:46 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 13:07:46 - INFO - llamafactory.model.model_utils.misc - Found linear modules: o_proj,q_proj,k_proj,v_proj,gate_proj,up_proj,down_proj
+09/07/2024 13:07:47 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 13:07:47 - WARNING - llamafactory.train.callbacks - Previous trainer log in this folder will be deleted.
+09/07/2024 13:07:47 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 13:07:47 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/07/2024 13:07:47 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.2568, 'grad_norm': 0.5329787731170654, 'learning_rate': 4.0909090909090915e-05, 'epoch': 0.45}
+{'loss': 0.0666, 'grad_norm': 0.4063754081726074, 'learning_rate': 4.919871753490891e-05, 'epoch': 0.91}
+{'loss': 0.0381, 'grad_norm': 0.8802160024642944, 'learning_rate': 4.6031338320779534e-05, 'epoch': 1.36}
+{'loss': 0.0267, 'grad_norm': 0.4473968744277954, 'learning_rate': 4.0763816677113064e-05, 'epoch': 1.82}
+{'loss': 0.0261, 'grad_norm': 0.30124104022979736, 'learning_rate': 3.392215553979679e-05, 'epoch': 2.27}
+{'loss': 0.0183, 'grad_norm': 0.2110157012939453, 'learning_rate': 2.6189547895593562e-05, 'epoch': 2.73}
+{'loss': 0.0172, 'grad_norm': 0.18314629793167114, 'learning_rate': 1.8338154657749128e-05, 'epoch': 3.18}
+{'loss': 0.011, 'grad_norm': 0.07666168361902237, 'learning_rate': 1.1151998403347244e-05, 'epoch': 3.64}
+{'loss': 0.0078, 'grad_norm': 0.03846896067261696, 'learning_rate': 5.348672631430318e-06, 'epoch': 4.09}
+{'loss': 0.0049, 'grad_norm': 0.166346475481987, 'learning_rate': 1.5076844803522922e-06, 'epoch': 4.55}
+{'loss': 0.006, 'grad_norm': 0.0809592455625534, 'learning_rate': 1.2586440420372936e-08, 'epoch': 5.0}
+{'train_runtime': 685.2305, 'train_samples_per_second': 2.554, 'train_steps_per_second': 0.161, 'train_loss': 0.04360377057032152, 'epoch': 5.0}
+***** train metrics *****
+  epoch                    =        5.0
+  total_flos               = 53976762GF
+  train_loss               =     0.0436
+  train_runtime            = 0:11:25.23
+  train_samples_per_second =      2.554
+  train_steps_per_second   =      0.161
+09/07/2024 13:19:21 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 13:19:21 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 13:19:21 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 13:19:21 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/07/2024 13:19:24 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 13:19:24 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/finetuned_models/abstRCT_acc_llama-3-8b-Instruct-bnb-4bit
+09/07/2024 13:19:24 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+       Claim      0.930     0.911     0.921       248
+     Premise      0.951     0.962     0.956       443
+
+    accuracy                          0.944       691
+   macro avg      0.940     0.936     0.938       691
+weighted avg      0.943     0.944     0.943       691
+
+              precision    recall  f1-score   support
+
+       Claim      0.867     0.890     0.879       191
+     Premise      0.950     0.939     0.944       424
+
+    accuracy                          0.924       615
+   macro avg      0.909     0.914     0.911       615
+weighted avg      0.924     0.924     0.924       615
+
+              precision    recall  f1-score   support
+
+       Claim      0.939     0.948     0.944       212
+     Premise      0.972     0.967     0.970       397
+
+    accuracy                          0.961       609
+   macro avg      0.956     0.958     0.957       609
+weighted avg      0.961     0.961     0.961       609
+
+Successfully ran abstRCT_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit acc 
+ 
+  *************** 
+
+Running abstRCT_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit aric
+09/07/2024 13:32:31 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:25693
+09/07/2024 13:32:41 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 13:32:41 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 13:32:41 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 13:32:41 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 13:32:41 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 13:32:41 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 13:32:41 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 13:32:41 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_aric_train_neo.json...
+09/07/2024 13:32:52 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 13:32:52 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_aric_train_neo.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 94612, 8278, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 10765, 5811, 4398, 1990, 5811, 6956, 304, 279, 8278, 1495, 323, 49229, 872, 12976, 955, 439, 3060, 330, 24249, 1, 477, 330, 21208, 3343, 1472, 2011, 471, 264, 1160, 315, 24657, 2641, 304, 279, 2768, 4823, 3645, 25, 5324, 1638, 9202, 48084, 9962, 794, 4416, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 705, 12976, 1857, 320, 496, 26090, 61453, 510, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 705, 12976, 1857, 320, 496, 8, 5163, 92, 1405, 1855, 2449, 330, 23013, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 24249, 1, 477, 330, 21208, 11690, 14711, 5810, 374, 279, 8278, 1495, 25, 220, 11579, 43035, 15419, 449, 293, 950, 332, 66796, 11, 264, 2536, 3751, 71916, 7294, 438, 26252, 11, 574, 7863, 449, 2211, 55681, 11, 3060, 34933, 477, 6593, 11, 304, 6978, 449, 83920, 22891, 423, 17, 47447, 9572, 13, 763, 459, 1825, 11, 47341, 11, 92520, 1992, 9269, 11, 6978, 1051, 47341, 311, 6514, 449, 220, 1135, 14060, 293, 950, 332, 66796, 320, 77, 284, 220, 14052, 8, 3131, 7446, 477, 311, 2211, 55681, 320, 77, 284, 220, 14052, 705, 3060, 477, 14946, 72783, 477, 45719, 26127, 315, 342, 24332, 33830, 65802, 349, 1475, 220, 1591, 2919, 13, 26150, 41265, 37442, 1051, 3115, 311, 6514, 8060, 323, 16945, 8624, 33824, 323, 20237, 13, 82935, 1392, 5343, 3477, 315, 66303, 68370, 2315, 11, 47447, 15696, 11, 18516, 86805, 77854, 2508, 5856, 5178, 2704, 11, 6784, 11, 3260, 4282, 292, 8670, 11, 323, 4367, 315, 2324, 14847, 13, 578, 23369, 8250, 315, 15419, 574, 220, 2137, 5672, 369, 293, 950, 332, 66796, 88186, 6978, 323, 220, 2983, 5672, 369, 2211, 496, 660, 6978, 26, 6514, 8060, 10222, 304, 220, 4331, 4, 323, 220, 2983, 4, 323, 8624, 33824, 304, 220, 3391, 4, 323, 220, 1644, 13689, 15947, 16134, 1741, 16, 29, 31969, 6372, 46603, 2211, 55681, 369, 2225, 37442, 320, 47, 366, 477, 284, 220, 15, 13, 6726, 705, 449, 31397, 42338, 320, 65, 950, 332, 66796, 25, 936, 55681, 8, 315, 220, 16, 13, 4370, 320, 2721, 4, 12410, 10074, 510, 11487, 1145, 220, 16, 13, 972, 311, 220, 17, 13, 410, 8, 369, 892, 311, 6514, 8060, 323, 220, 16, 13, 21, 320, 2721, 4, 21351, 11, 220, 16, 13, 777, 311, 220, 17, 13, 868, 8, 369, 892, 311, 8624, 33824, 13, 694, 1741, 16, 1822, 1741, 17, 29, 5659, 279, 220, 16, 4771, 20237, 6492, 11, 279, 31397, 11595, 369, 19463, 315, 4648, 574, 220, 16, 13, 1682, 320, 2721, 4, 21351, 11, 220, 15, 13, 4161, 311, 220, 16, 13, 5332, 570, 694, 1741, 17, 1822, 1741, 18, 29, 14636, 3117, 11, 449, 264, 23369, 1833, 5352, 315, 220, 4218, 5672, 11, 23369, 20237, 706, 539, 1027, 8813, 304, 3060, 1912, 13, 694, 1741, 18, 1822, 1741, 19, 29, 29240, 505, 26954, 304, 3892, 4367, 315, 2324, 7482, 1051, 12207, 2204, 320, 47, 366, 477, 284, 220, 15, 13, 1721, 8, 1990, 6514, 5315, 48582, 505, 4038, 220, 16, 311, 220, 21, 11, 323, 682, 46603, 293, 950, 332, 66796, 13, 694, 1741, 19, 1822, 1741, 20, 29, 28993, 11, 279, 7294, 438, 26252, 574, 1664, 66441, 7863, 449, 2211, 55681, 26, 694, 1741, 20, 1822, 1741, 21, 29, 449, 293, 950, 332, 66796, 11, 4106, 18698, 288, 10222, 2753, 3629, 323, 17659, 8541, 29668, 323, 342, 1910, 66274, 561, 689, 810, 3629, 13, 694, 1741, 21, 1822, 1741, 22, 29, 10541, 264, 47040, 315, 220, 1135, 14060, 315, 293, 950, 332, 66796, 3131, 7446, 574, 539, 439, 7524, 439, 2211, 55681, 11, 694, 1741, 22, 1822, 1741, 23, 29, 279, 37849, 4367, 315, 2324, 20124, 323, 279, 3428, 39775, 315, 2536, 71, 494, 25180, 31959, 4455, 3493, 8125, 311, 15806, 293, 950, 332, 66796, 11, 439, 264, 3254, 37471, 8479, 11, 520, 5190, 35130, 13, 694, 1741, 23, 29, 128009, 128006, 78191, 128007, 271, 5018, 1638, 9202, 48084, 9962, 794, 4416, 16, 11, 220, 23, 11, 330, 21208, 8073, 510, 17, 11, 220, 23, 11, 330, 24249, 8073, 510, 18, 11, 220, 17, 11, 330, 21208, 8073, 510, 19, 11, 220, 23, 11, 330, 24249, 8073, 510, 20, 11, 220, 23, 11, 330, 24249, 8073, 510, 21, 11, 220, 23, 11, 330, 24249, 8073, 510, 22, 11, 220, 23, 11, 330, 21208, 1365, 14316, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a biomedical abstract text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to identify argument relations between argument components in the abstract text and classify their relation type as either "support" or "attack". You must return a list of triplets in the following JSON format: {"list_argument_relation_types": [[source AC (int), target AC (int), relation_type (str)],..., [source AC (int), target AC (int), relation_type (str)]]} where each element "relation_type (str)" is replaced by either "support" or "attack".
+
+### Here is the abstract text:  Single-agent therapy with bicalutamide, a nonsteroidal antiandrogen, was compared with castration, either surgical or medical, in patients with untreated Stage D2 prostate cancer. In an open, randomized, multicenter trial, patients were randomized to treatment with 50 mg bicalutamide (n = 243) once daily or to castration (n = 243), either orchiectomy or depot injection of goserelin acetate every 28 days. Primary efficacy endpoints were times to treatment failure and objective disease progression and survival. Assessments included review of measurable metastases, prostate dimensions, Eastern Cooperative Oncology Group performance status, pain, analgesic requirements, and quality of life responses. The median duration of therapy was 39 weeks for bicalutamide-treated patients and 42 weeks for castrated patients; treatment failure occurred in 53% and 42% and disease progression in 43% and 33%, respectively.<AC1> Treatment effects favored castration for both endpoints (P < or = 0.002), with hazard ratios (bicalutamide:castration) of 1.54 (95% confidence interval [CI], 1.18 to 2.00) for time to treatment failure and 1.6 (95% CI, 1.19 to 2.15) for time to disease progression. </AC1><AC2> From the 1-year survival analysis, the hazard ratio for probability of death was 1.29 (95% CI, 0.96 to 1.72). </AC2><AC3> Thus far, with a median follow-up of 86 weeks, median survival has not been reached in either group. </AC3><AC4> Changes from baseline in several quality of life variables were significantly different (P < or = 0.01) between treatment groups periodically from months 1 to 6, and all favored bicalutamide. </AC4><AC5> Overall, the antiandrogen was well tolerated compared with castration; </AC5><AC6> with bicalutamide, hot flushes occurred less often and breast tenderness and gynecomastia more often. </AC6><AC7> Although a dosage of 50 mg of bicalutamide once daily was not as effective as castration, </AC7><AC8> the favorable quality of life outcomes and the low incidence of nonhormonal adverse events provide reasons to evaluate bicalutamide, as a single therapeutic agent, at higher doses. </AC8><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"list_argument_relation_types": [[1, 8, "attack"], [2, 8, "support"], [3, 2, "attack"], [4, 8, "support"], [5, 8, "support"], [6, 8, "support"], [7, 8, "attack"]]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 1638, 9202, 48084, 9962, 794, 4416, 16, 11, 220, 23, 11, 330, 21208, 8073, 510, 17, 11, 220, 23, 11, 330, 24249, 8073, 510, 18, 11, 220, 17, 11, 330, 21208, 8073, 510, 19, 11, 220, 23, 11, 330, 24249, 8073, 510, 20, 11, 220, 23, 11, 330, 24249, 8073, 510, 21, 11, 220, 23, 11, 330, 24249, 8073, 510, 22, 11, 220, 23, 11, 330, 21208, 1365, 14316, 128009]
+labels:
+{"list_argument_relation_types": [[1, 8, "attack"], [2, 8, "support"], [3, 2, "attack"], [4, 8, "support"], [5, 8, "support"], [6, 8, "support"], [7, 8, "attack"]]}<|eot_id|>
+09/07/2024 13:32:53 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 13:32:53 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 13:32:53 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 13:32:53 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 13:32:59 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 13:32:59 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 13:32:59 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 13:32:59 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 13:32:59 - INFO - llamafactory.model.model_utils.misc - Found linear modules: o_proj,q_proj,up_proj,gate_proj,k_proj,down_proj,v_proj
+09/07/2024 13:32:59 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 13:32:59 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 13:32:59 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 13:32:59 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 13:32:59 - INFO - llamafactory.model.model_utils.misc - Found linear modules: up_proj,gate_proj,k_proj,down_proj,q_proj,v_proj,o_proj
+09/07/2024 13:32:59 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 13:32:59 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 13:32:59 - WARNING - llamafactory.train.callbacks - Previous trainer log in this folder will be deleted.
+09/07/2024 13:33:00 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/07/2024 13:33:00 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.369, 'grad_norm': 0.3328249454498291, 'learning_rate': 4.0909090909090915e-05, 'epoch': 0.45}
+{'loss': 0.1778, 'grad_norm': 0.36556991934776306, 'learning_rate': 4.919871753490891e-05, 'epoch': 0.91}
+{'loss': 0.1204, 'grad_norm': 0.3378123939037323, 'learning_rate': 4.6031338320779534e-05, 'epoch': 1.36}
+{'loss': 0.1181, 'grad_norm': 0.36605367064476013, 'learning_rate': 4.0763816677113064e-05, 'epoch': 1.82}
+{'loss': 0.0879, 'grad_norm': 0.2716487944126129, 'learning_rate': 3.392215553979679e-05, 'epoch': 2.27}
+{'loss': 0.0697, 'grad_norm': 0.4095947742462158, 'learning_rate': 2.6189547895593562e-05, 'epoch': 2.73}
+{'loss': 0.0589, 'grad_norm': 0.3160102665424347, 'learning_rate': 1.8338154657749128e-05, 'epoch': 3.18}
+{'loss': 0.0368, 'grad_norm': 0.18506580591201782, 'learning_rate': 1.1151998403347244e-05, 'epoch': 3.64}
+{'loss': 0.0355, 'grad_norm': 0.38564765453338623, 'learning_rate': 5.348672631430318e-06, 'epoch': 4.09}
+{'loss': 0.0174, 'grad_norm': 0.21502692997455597, 'learning_rate': 1.5076844803522922e-06, 'epoch': 4.55}
+{'loss': 0.0197, 'grad_norm': 0.24197354912757874, 'learning_rate': 1.2586440420372936e-08, 'epoch': 5.0}
+{'train_runtime': 685.274, 'train_samples_per_second': 2.554, 'train_steps_per_second': 0.161, 'train_loss': 0.10101696293462406, 'epoch': 5.0}
+***** train metrics *****
+  epoch                    =        5.0
+  total_flos               = 54095185GF
+  train_loss               =      0.101
+  train_runtime            = 0:11:25.27
+  train_samples_per_second =      2.554
+  train_steps_per_second   =      0.161
+09/07/2024 13:44:33 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 13:44:34 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 13:44:34 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 13:44:34 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/07/2024 13:44:37 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 13:44:37 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/finetuned_models/abstRCT_aric_llama-3-8b-Instruct-bnb-4bit
+09/07/2024 13:44:37 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+Error encountered with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit aric. Skipping to the next pair. 
+ 
+  ************* 
+
+Running abstRCT_finetune.py with arguments: unsloth/llama-3-8b-Instruct acc
+09/07/2024 14:04:41 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:24008
+09/07/2024 14:04:51 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 14:04:51 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 14:04:51 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 14:04:51 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 14:04:51 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 14:04:51 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 14:04:52 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:04:57 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:04:57 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_acc_train_neo.json...
+09/07/2024 14:05:03 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_acc_train_neo.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 49229, 1855, 5811, 3777, 304, 279, 1495, 439, 3060, 330, 46644, 1, 477, 330, 42562, 1082, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 3777, 4595, 11, 26549, 315, 3160, 220, 23, 11, 304, 2768, 4823, 3645, 25, 5324, 8739, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 8739, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 46644, 1, 477, 330, 42562, 1082, 3343, 4815, 14711, 5810, 374, 279, 8278, 1495, 25, 220, 11579, 43035, 15419, 449, 293, 950, 332, 66796, 11, 264, 2536, 3751, 71916, 7294, 438, 26252, 11, 574, 7863, 449, 2211, 55681, 11, 3060, 34933, 477, 6593, 11, 304, 6978, 449, 83920, 22891, 423, 17, 47447, 9572, 13, 763, 459, 1825, 11, 47341, 11, 92520, 1992, 9269, 11, 6978, 1051, 47341, 311, 6514, 449, 220, 1135, 14060, 293, 950, 332, 66796, 320, 77, 284, 220, 14052, 8, 3131, 7446, 477, 311, 2211, 55681, 320, 77, 284, 220, 14052, 705, 3060, 477, 14946, 72783, 477, 45719, 26127, 315, 342, 24332, 33830, 65802, 349, 1475, 220, 1591, 2919, 13, 26150, 41265, 37442, 1051, 3115, 311, 6514, 8060, 323, 16945, 8624, 33824, 323, 20237, 13, 82935, 1392, 5343, 3477, 315, 66303, 68370, 2315, 11, 47447, 15696, 11, 18516, 86805, 77854, 2508, 5856, 5178, 2704, 11, 6784, 11, 3260, 4282, 292, 8670, 11, 323, 4367, 315, 2324, 14847, 13, 578, 23369, 8250, 315, 15419, 574, 220, 2137, 5672, 369, 293, 950, 332, 66796, 88186, 6978, 323, 220, 2983, 5672, 369, 2211, 496, 660, 6978, 26, 6514, 8060, 10222, 304, 220, 4331, 4, 323, 220, 2983, 4, 323, 8624, 33824, 304, 220, 3391, 4, 323, 220, 1644, 13689, 15947, 16134, 1741, 16, 29, 31969, 6372, 46603, 2211, 55681, 369, 2225, 37442, 320, 47, 366, 477, 284, 220, 15, 13, 6726, 705, 449, 31397, 42338, 320, 65, 950, 332, 66796, 25, 936, 55681, 8, 315, 220, 16, 13, 4370, 320, 2721, 4, 12410, 10074, 510, 11487, 1145, 220, 16, 13, 972, 311, 220, 17, 13, 410, 8, 369, 892, 311, 6514, 8060, 323, 220, 16, 13, 21, 320, 2721, 4, 21351, 11, 220, 16, 13, 777, 311, 220, 17, 13, 868, 8, 369, 892, 311, 8624, 33824, 13, 694, 1741, 16, 1822, 1741, 17, 29, 5659, 279, 220, 16, 4771, 20237, 6492, 11, 279, 31397, 11595, 369, 19463, 315, 4648, 574, 220, 16, 13, 1682, 320, 2721, 4, 21351, 11, 220, 15, 13, 4161, 311, 220, 16, 13, 5332, 570, 694, 1741, 17, 1822, 1741, 18, 29, 14636, 3117, 11, 449, 264, 23369, 1833, 5352, 315, 220, 4218, 5672, 11, 23369, 20237, 706, 539, 1027, 8813, 304, 3060, 1912, 13, 694, 1741, 18, 1822, 1741, 19, 29, 29240, 505, 26954, 304, 3892, 4367, 315, 2324, 7482, 1051, 12207, 2204, 320, 47, 366, 477, 284, 220, 15, 13, 1721, 8, 1990, 6514, 5315, 48582, 505, 4038, 220, 16, 311, 220, 21, 11, 323, 682, 46603, 293, 950, 332, 66796, 13, 694, 1741, 19, 1822, 1741, 20, 29, 28993, 11, 279, 7294, 438, 26252, 574, 1664, 66441, 7863, 449, 2211, 55681, 26, 694, 1741, 20, 1822, 1741, 21, 29, 449, 293, 950, 332, 66796, 11, 4106, 18698, 288, 10222, 2753, 3629, 323, 17659, 8541, 29668, 323, 342, 1910, 66274, 561, 689, 810, 3629, 13, 694, 1741, 21, 1822, 1741, 22, 29, 10541, 264, 47040, 315, 220, 1135, 14060, 315, 293, 950, 332, 66796, 3131, 7446, 574, 539, 439, 7524, 439, 2211, 55681, 11, 694, 1741, 22, 1822, 1741, 23, 29, 279, 37849, 4367, 315, 2324, 20124, 323, 279, 3428, 39775, 315, 2536, 71, 494, 25180, 31959, 4455, 3493, 8125, 311, 15806, 293, 950, 332, 66796, 11, 439, 264, 3254, 37471, 8479, 11, 520, 5190, 35130, 13, 694, 1741, 23, 29, 128009, 128006, 78191, 128007, 271, 5018, 8739, 9962, 794, 4482, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 46644, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to classify each argument component in the text as either "Claim" or "Premise". You must return a list of argument component types, strictly of length 8, in following JSON format: {"component_types": ["component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)"]} where each element "component_type (str)" is replaced by either "Claim" or "Premise". 
+
+### Here is the abstract text:  Single-agent therapy with bicalutamide, a nonsteroidal antiandrogen, was compared with castration, either surgical or medical, in patients with untreated Stage D2 prostate cancer. In an open, randomized, multicenter trial, patients were randomized to treatment with 50 mg bicalutamide (n = 243) once daily or to castration (n = 243), either orchiectomy or depot injection of goserelin acetate every 28 days. Primary efficacy endpoints were times to treatment failure and objective disease progression and survival. Assessments included review of measurable metastases, prostate dimensions, Eastern Cooperative Oncology Group performance status, pain, analgesic requirements, and quality of life responses. The median duration of therapy was 39 weeks for bicalutamide-treated patients and 42 weeks for castrated patients; treatment failure occurred in 53% and 42% and disease progression in 43% and 33%, respectively.<AC1> Treatment effects favored castration for both endpoints (P < or = 0.002), with hazard ratios (bicalutamide:castration) of 1.54 (95% confidence interval [CI], 1.18 to 2.00) for time to treatment failure and 1.6 (95% CI, 1.19 to 2.15) for time to disease progression. </AC1><AC2> From the 1-year survival analysis, the hazard ratio for probability of death was 1.29 (95% CI, 0.96 to 1.72). </AC2><AC3> Thus far, with a median follow-up of 86 weeks, median survival has not been reached in either group. </AC3><AC4> Changes from baseline in several quality of life variables were significantly different (P < or = 0.01) between treatment groups periodically from months 1 to 6, and all favored bicalutamide. </AC4><AC5> Overall, the antiandrogen was well tolerated compared with castration; </AC5><AC6> with bicalutamide, hot flushes occurred less often and breast tenderness and gynecomastia more often. </AC6><AC7> Although a dosage of 50 mg of bicalutamide once daily was not as effective as castration, </AC7><AC8> the favorable quality of life outcomes and the low incidence of nonhormonal adverse events provide reasons to evaluate bicalutamide, as a single therapeutic agent, at higher doses. </AC8><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"component_types": ["Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Claim"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 8739, 9962, 794, 4482, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 46644, 93546, 128009]
+labels:
+{"component_types": ["Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Claim"]}<|eot_id|>
+09/07/2024 14:05:04 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/07/2024 14:05:04 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/07/2024 14:05:36 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 14:05:36 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 14:05:36 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 14:05:36 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 14:05:36 - INFO - llamafactory.model.model_utils.misc - Found linear modules: k_proj,up_proj,down_proj,q_proj,o_proj,v_proj,gate_proj
+09/07/2024 14:05:36 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 14:05:36 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 14:05:36 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 14:05:36 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 14:05:36 - INFO - llamafactory.model.model_utils.misc - Found linear modules: up_proj,down_proj,q_proj,v_proj,o_proj,gate_proj,k_proj
+09/07/2024 14:05:36 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 14:05:36 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 14:05:37 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/07/2024 14:05:37 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.2572, 'grad_norm': 0.5288675427436829, 'learning_rate': 4.0909090909090915e-05, 'epoch': 0.45}
+{'loss': 0.067, 'grad_norm': 0.3945868909358978, 'learning_rate': 4.919871753490891e-05, 'epoch': 0.91}
+{'loss': 0.0387, 'grad_norm': 0.7952857613563538, 'learning_rate': 4.6031338320779534e-05, 'epoch': 1.36}
+{'loss': 0.0255, 'grad_norm': 0.3475908935070038, 'learning_rate': 4.0763816677113064e-05, 'epoch': 1.82}
+{'loss': 0.0245, 'grad_norm': 0.2527514696121216, 'learning_rate': 3.392215553979679e-05, 'epoch': 2.27}
+{'loss': 0.0171, 'grad_norm': 0.13382047414779663, 'learning_rate': 2.6189547895593562e-05, 'epoch': 2.73}
+{'loss': 0.0142, 'grad_norm': 0.17001961171627045, 'learning_rate': 1.8338154657749128e-05, 'epoch': 3.18}
+{'loss': 0.01, 'grad_norm': 0.030682669952511787, 'learning_rate': 1.1151998403347244e-05, 'epoch': 3.64}
+{'loss': 0.0074, 'grad_norm': 0.03414640575647354, 'learning_rate': 5.348672631430318e-06, 'epoch': 4.09}
+{'loss': 0.0039, 'grad_norm': 0.07581731677055359, 'learning_rate': 1.5076844803522922e-06, 'epoch': 4.55}
+{'loss': 0.0049, 'grad_norm': 0.07914835959672928, 'learning_rate': 1.2586440420372936e-08, 'epoch': 5.0}
+{'train_runtime': 601.9043, 'train_samples_per_second': 2.907, 'train_steps_per_second': 0.183, 'train_loss': 0.042753004214980385, 'epoch': 5.0}
+***** train metrics *****
+  epoch                    =        5.0
+  total_flos               = 53976762GF
+  train_loss               =     0.0428
+  train_runtime            = 0:10:01.90
+  train_samples_per_second =      2.907
+  train_steps_per_second   =      0.183
+09/07/2024 14:15:49 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:15:49 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/07/2024 14:15:49 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/07/2024 14:15:55 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 14:15:56 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/finetuned_models/abstRCT_acc_llama-3-8b-Instruct
+09/07/2024 14:15:56 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+       Claim      0.938     0.911     0.924       248
+     Premise      0.951     0.966     0.959       443
+
+    accuracy                          0.946       691
+   macro avg      0.944     0.939     0.941       691
+weighted avg      0.946     0.946     0.946       691
+
+              precision    recall  f1-score   support
+
+       Claim      0.885     0.885     0.885       191
+     Premise      0.948     0.948     0.948       424
+
+    accuracy                          0.928       615
+   macro avg      0.916     0.916     0.916       615
+weighted avg      0.928     0.928     0.928       615
+
+              precision    recall  f1-score   support
+
+       Claim      0.952     0.943     0.948       212
+     Premise      0.970     0.975     0.972       397
+
+    accuracy                          0.964       609
+   macro avg      0.961     0.959     0.960       609
+weighted avg      0.964     0.964     0.964       609
+
+Successfully ran abstRCT_finetune.py with arguments: unsloth/llama-3-8b-Instruct acc 
+ 
+  *************** 
+
+Running abstRCT_finetune.py with arguments: unsloth/llama-3-8b-Instruct aric
+09/07/2024 14:28:50 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:27654
+09/07/2024 14:29:11 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 14:29:11 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 14:29:11 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 14:29:11 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 14:29:11 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 14:29:11 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 14:29:12 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:29:12 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:29:12 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_aric_train_neo.json...
+09/07/2024 14:29:13 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_aric_train_neo.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 94612, 8278, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 10765, 5811, 4398, 1990, 5811, 6956, 304, 279, 8278, 1495, 323, 49229, 872, 12976, 955, 439, 3060, 330, 24249, 1, 477, 330, 21208, 3343, 1472, 2011, 471, 264, 1160, 315, 24657, 2641, 304, 279, 2768, 4823, 3645, 25, 5324, 1638, 9202, 48084, 9962, 794, 4416, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 705, 12976, 1857, 320, 496, 26090, 61453, 510, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 705, 12976, 1857, 320, 496, 8, 5163, 92, 1405, 1855, 2449, 330, 23013, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 24249, 1, 477, 330, 21208, 11690, 14711, 5810, 374, 279, 8278, 1495, 25, 220, 11579, 43035, 15419, 449, 293, 950, 332, 66796, 11, 264, 2536, 3751, 71916, 7294, 438, 26252, 11, 574, 7863, 449, 2211, 55681, 11, 3060, 34933, 477, 6593, 11, 304, 6978, 449, 83920, 22891, 423, 17, 47447, 9572, 13, 763, 459, 1825, 11, 47341, 11, 92520, 1992, 9269, 11, 6978, 1051, 47341, 311, 6514, 449, 220, 1135, 14060, 293, 950, 332, 66796, 320, 77, 284, 220, 14052, 8, 3131, 7446, 477, 311, 2211, 55681, 320, 77, 284, 220, 14052, 705, 3060, 477, 14946, 72783, 477, 45719, 26127, 315, 342, 24332, 33830, 65802, 349, 1475, 220, 1591, 2919, 13, 26150, 41265, 37442, 1051, 3115, 311, 6514, 8060, 323, 16945, 8624, 33824, 323, 20237, 13, 82935, 1392, 5343, 3477, 315, 66303, 68370, 2315, 11, 47447, 15696, 11, 18516, 86805, 77854, 2508, 5856, 5178, 2704, 11, 6784, 11, 3260, 4282, 292, 8670, 11, 323, 4367, 315, 2324, 14847, 13, 578, 23369, 8250, 315, 15419, 574, 220, 2137, 5672, 369, 293, 950, 332, 66796, 88186, 6978, 323, 220, 2983, 5672, 369, 2211, 496, 660, 6978, 26, 6514, 8060, 10222, 304, 220, 4331, 4, 323, 220, 2983, 4, 323, 8624, 33824, 304, 220, 3391, 4, 323, 220, 1644, 13689, 15947, 16134, 1741, 16, 29, 31969, 6372, 46603, 2211, 55681, 369, 2225, 37442, 320, 47, 366, 477, 284, 220, 15, 13, 6726, 705, 449, 31397, 42338, 320, 65, 950, 332, 66796, 25, 936, 55681, 8, 315, 220, 16, 13, 4370, 320, 2721, 4, 12410, 10074, 510, 11487, 1145, 220, 16, 13, 972, 311, 220, 17, 13, 410, 8, 369, 892, 311, 6514, 8060, 323, 220, 16, 13, 21, 320, 2721, 4, 21351, 11, 220, 16, 13, 777, 311, 220, 17, 13, 868, 8, 369, 892, 311, 8624, 33824, 13, 694, 1741, 16, 1822, 1741, 17, 29, 5659, 279, 220, 16, 4771, 20237, 6492, 11, 279, 31397, 11595, 369, 19463, 315, 4648, 574, 220, 16, 13, 1682, 320, 2721, 4, 21351, 11, 220, 15, 13, 4161, 311, 220, 16, 13, 5332, 570, 694, 1741, 17, 1822, 1741, 18, 29, 14636, 3117, 11, 449, 264, 23369, 1833, 5352, 315, 220, 4218, 5672, 11, 23369, 20237, 706, 539, 1027, 8813, 304, 3060, 1912, 13, 694, 1741, 18, 1822, 1741, 19, 29, 29240, 505, 26954, 304, 3892, 4367, 315, 2324, 7482, 1051, 12207, 2204, 320, 47, 366, 477, 284, 220, 15, 13, 1721, 8, 1990, 6514, 5315, 48582, 505, 4038, 220, 16, 311, 220, 21, 11, 323, 682, 46603, 293, 950, 332, 66796, 13, 694, 1741, 19, 1822, 1741, 20, 29, 28993, 11, 279, 7294, 438, 26252, 574, 1664, 66441, 7863, 449, 2211, 55681, 26, 694, 1741, 20, 1822, 1741, 21, 29, 449, 293, 950, 332, 66796, 11, 4106, 18698, 288, 10222, 2753, 3629, 323, 17659, 8541, 29668, 323, 342, 1910, 66274, 561, 689, 810, 3629, 13, 694, 1741, 21, 1822, 1741, 22, 29, 10541, 264, 47040, 315, 220, 1135, 14060, 315, 293, 950, 332, 66796, 3131, 7446, 574, 539, 439, 7524, 439, 2211, 55681, 11, 694, 1741, 22, 1822, 1741, 23, 29, 279, 37849, 4367, 315, 2324, 20124, 323, 279, 3428, 39775, 315, 2536, 71, 494, 25180, 31959, 4455, 3493, 8125, 311, 15806, 293, 950, 332, 66796, 11, 439, 264, 3254, 37471, 8479, 11, 520, 5190, 35130, 13, 694, 1741, 23, 29, 128009, 128006, 78191, 128007, 271, 5018, 1638, 9202, 48084, 9962, 794, 4416, 16, 11, 220, 23, 11, 330, 21208, 8073, 510, 17, 11, 220, 23, 11, 330, 24249, 8073, 510, 18, 11, 220, 17, 11, 330, 21208, 8073, 510, 19, 11, 220, 23, 11, 330, 24249, 8073, 510, 20, 11, 220, 23, 11, 330, 24249, 8073, 510, 21, 11, 220, 23, 11, 330, 24249, 8073, 510, 22, 11, 220, 23, 11, 330, 21208, 1365, 14316, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a biomedical abstract text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to identify argument relations between argument components in the abstract text and classify their relation type as either "support" or "attack". You must return a list of triplets in the following JSON format: {"list_argument_relation_types": [[source AC (int), target AC (int), relation_type (str)],..., [source AC (int), target AC (int), relation_type (str)]]} where each element "relation_type (str)" is replaced by either "support" or "attack".
+
+### Here is the abstract text:  Single-agent therapy with bicalutamide, a nonsteroidal antiandrogen, was compared with castration, either surgical or medical, in patients with untreated Stage D2 prostate cancer. In an open, randomized, multicenter trial, patients were randomized to treatment with 50 mg bicalutamide (n = 243) once daily or to castration (n = 243), either orchiectomy or depot injection of goserelin acetate every 28 days. Primary efficacy endpoints were times to treatment failure and objective disease progression and survival. Assessments included review of measurable metastases, prostate dimensions, Eastern Cooperative Oncology Group performance status, pain, analgesic requirements, and quality of life responses. The median duration of therapy was 39 weeks for bicalutamide-treated patients and 42 weeks for castrated patients; treatment failure occurred in 53% and 42% and disease progression in 43% and 33%, respectively.<AC1> Treatment effects favored castration for both endpoints (P < or = 0.002), with hazard ratios (bicalutamide:castration) of 1.54 (95% confidence interval [CI], 1.18 to 2.00) for time to treatment failure and 1.6 (95% CI, 1.19 to 2.15) for time to disease progression. </AC1><AC2> From the 1-year survival analysis, the hazard ratio for probability of death was 1.29 (95% CI, 0.96 to 1.72). </AC2><AC3> Thus far, with a median follow-up of 86 weeks, median survival has not been reached in either group. </AC3><AC4> Changes from baseline in several quality of life variables were significantly different (P < or = 0.01) between treatment groups periodically from months 1 to 6, and all favored bicalutamide. </AC4><AC5> Overall, the antiandrogen was well tolerated compared with castration; </AC5><AC6> with bicalutamide, hot flushes occurred less often and breast tenderness and gynecomastia more often. </AC6><AC7> Although a dosage of 50 mg of bicalutamide once daily was not as effective as castration, </AC7><AC8> the favorable quality of life outcomes and the low incidence of nonhormonal adverse events provide reasons to evaluate bicalutamide, as a single therapeutic agent, at higher doses. </AC8><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"list_argument_relation_types": [[1, 8, "attack"], [2, 8, "support"], [3, 2, "attack"], [4, 8, "support"], [5, 8, "support"], [6, 8, "support"], [7, 8, "attack"]]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 1638, 9202, 48084, 9962, 794, 4416, 16, 11, 220, 23, 11, 330, 21208, 8073, 510, 17, 11, 220, 23, 11, 330, 24249, 8073, 510, 18, 11, 220, 17, 11, 330, 21208, 8073, 510, 19, 11, 220, 23, 11, 330, 24249, 8073, 510, 20, 11, 220, 23, 11, 330, 24249, 8073, 510, 21, 11, 220, 23, 11, 330, 24249, 8073, 510, 22, 11, 220, 23, 11, 330, 21208, 1365, 14316, 128009]
+labels:
+{"list_argument_relation_types": [[1, 8, "attack"], [2, 8, "support"], [3, 2, "attack"], [4, 8, "support"], [5, 8, "support"], [6, 8, "support"], [7, 8, "attack"]]}<|eot_id|>
+09/07/2024 14:29:15 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/07/2024 14:29:15 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/07/2024 14:29:36 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 14:29:36 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 14:29:36 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 14:29:36 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 14:29:36 - INFO - llamafactory.model.model_utils.misc - Found linear modules: k_proj,up_proj,down_proj,v_proj,gate_proj,o_proj,q_proj
+09/07/2024 14:29:36 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 14:29:36 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 14:29:36 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 14:29:36 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 14:29:36 - INFO - llamafactory.model.model_utils.misc - Found linear modules: gate_proj,up_proj,v_proj,q_proj,down_proj,k_proj,o_proj
+09/07/2024 14:29:37 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 14:29:37 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/07/2024 14:29:37 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/07/2024 14:29:37 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.3337, 'grad_norm': 0.37920257449150085, 'learning_rate': 4.545454545454546e-05, 'epoch': 0.45}
+{'loss': 0.1695, 'grad_norm': 0.3743487596511841, 'learning_rate': 4.898732434036244e-05, 'epoch': 0.91}
+{'loss': 0.1151, 'grad_norm': 0.34490108489990234, 'learning_rate': 4.559191453574582e-05, 'epoch': 1.36}
+{'loss': 0.1114, 'grad_norm': 0.387388676404953, 'learning_rate': 4.014024217844167e-05, 'epoch': 1.82}
+{'loss': 0.0864, 'grad_norm': 0.28288888931274414, 'learning_rate': 3.3176699082935545e-05, 'epoch': 2.27}
+{'loss': 0.0662, 'grad_norm': 0.31606602668762207, 'learning_rate': 2.5396649095870202e-05, 'epoch': 2.73}
+{'loss': 0.0534, 'grad_norm': 0.33426833152770996, 'learning_rate': 1.7576990616793137e-05, 'epoch': 3.18}
+{'loss': 0.0336, 'grad_norm': 0.21568015217781067, 'learning_rate': 1.049857726072005e-05, 'epoch': 3.64}
+{'loss': 0.0301, 'grad_norm': 0.4023374319076538, 'learning_rate': 4.868243561723535e-06, 'epoch': 4.09}
+{'loss': 0.0143, 'grad_norm': 0.1685413420200348, 'learning_rate': 1.248222056476367e-06, 'epoch': 4.55}
+{'loss': 0.0158, 'grad_norm': 0.21594823896884918, 'learning_rate': 0.0, 'epoch': 5.0}
+{'train_runtime': 601.586, 'train_samples_per_second': 2.909, 'train_steps_per_second': 0.183, 'train_loss': 0.09359611516649073, 'epoch': 5.0}
+***** train metrics *****
+  epoch                    =        5.0
+  total_flos               = 54095185GF
+  train_loss               =     0.0936
+  train_runtime            = 0:10:01.58
+  train_samples_per_second =      2.909
+  train_steps_per_second   =      0.183
+09/07/2024 14:39:50 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:39:50 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/07/2024 14:39:50 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/07/2024 14:39:56 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 14:39:57 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/finetuned_models/abstRCT_aric_llama-3-8b-Instruct
+09/07/2024 14:39:57 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+        None      0.982     0.978     0.980      6435
+      attack      0.692     0.610     0.649        59
+     support      0.650     0.717     0.682       360
+
+    accuracy                          0.961      6854
+   macro avg      0.775     0.768     0.770      6854
+weighted avg      0.962     0.961     0.961      6854
+
+              precision    recall  f1-score   support
+
+        None      0.986     0.972     0.979      5219
+      attack      0.538     0.500     0.519        28
+     support      0.650     0.808     0.720       317
+
+    accuracy                          0.960      5564
+   macro avg      0.725     0.760     0.739      5564
+weighted avg      0.965     0.960     0.962      5564
+
+              precision    recall  f1-score   support
+
+        None      0.985     0.970     0.977      5176
+      attack      0.667     0.583     0.622        24
+     support      0.600     0.760     0.671       296
+
+    accuracy                          0.957      5496
+   macro avg      0.750     0.771     0.757      5496
+weighted avg      0.963     0.957     0.959      5496
+
+Successfully ran abstRCT_finetune.py with arguments: unsloth/llama-3-8b-Instruct aric 
+ 
+  *************** 
+
+Running abstRCT_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit acc
+09/07/2024 14:59:41 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:23816
+09/07/2024 14:59:51 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 14:59:51 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 14:59:51 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 14:59:51 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 14:59:51 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 14:59:51 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 14:59:52 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:59:52 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_acc_train_neo.json...
+09/07/2024 14:59:52 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 14:59:58 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_acc_train_neo.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 49229, 1855, 5811, 3777, 304, 279, 1495, 439, 3060, 330, 46644, 1, 477, 330, 42562, 1082, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 3777, 4595, 11, 26549, 315, 3160, 220, 23, 11, 304, 2768, 4823, 3645, 25, 5324, 8739, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 8739, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 46644, 1, 477, 330, 42562, 1082, 3343, 4815, 14711, 5810, 374, 279, 8278, 1495, 25, 220, 11579, 43035, 15419, 449, 293, 950, 332, 66796, 11, 264, 2536, 3751, 71916, 7294, 438, 26252, 11, 574, 7863, 449, 2211, 55681, 11, 3060, 34933, 477, 6593, 11, 304, 6978, 449, 83920, 22891, 423, 17, 47447, 9572, 13, 763, 459, 1825, 11, 47341, 11, 92520, 1992, 9269, 11, 6978, 1051, 47341, 311, 6514, 449, 220, 1135, 14060, 293, 950, 332, 66796, 320, 77, 284, 220, 14052, 8, 3131, 7446, 477, 311, 2211, 55681, 320, 77, 284, 220, 14052, 705, 3060, 477, 14946, 72783, 477, 45719, 26127, 315, 342, 24332, 33830, 65802, 349, 1475, 220, 1591, 2919, 13, 26150, 41265, 37442, 1051, 3115, 311, 6514, 8060, 323, 16945, 8624, 33824, 323, 20237, 13, 82935, 1392, 5343, 3477, 315, 66303, 68370, 2315, 11, 47447, 15696, 11, 18516, 86805, 77854, 2508, 5856, 5178, 2704, 11, 6784, 11, 3260, 4282, 292, 8670, 11, 323, 4367, 315, 2324, 14847, 13, 578, 23369, 8250, 315, 15419, 574, 220, 2137, 5672, 369, 293, 950, 332, 66796, 88186, 6978, 323, 220, 2983, 5672, 369, 2211, 496, 660, 6978, 26, 6514, 8060, 10222, 304, 220, 4331, 4, 323, 220, 2983, 4, 323, 8624, 33824, 304, 220, 3391, 4, 323, 220, 1644, 13689, 15947, 16134, 1741, 16, 29, 31969, 6372, 46603, 2211, 55681, 369, 2225, 37442, 320, 47, 366, 477, 284, 220, 15, 13, 6726, 705, 449, 31397, 42338, 320, 65, 950, 332, 66796, 25, 936, 55681, 8, 315, 220, 16, 13, 4370, 320, 2721, 4, 12410, 10074, 510, 11487, 1145, 220, 16, 13, 972, 311, 220, 17, 13, 410, 8, 369, 892, 311, 6514, 8060, 323, 220, 16, 13, 21, 320, 2721, 4, 21351, 11, 220, 16, 13, 777, 311, 220, 17, 13, 868, 8, 369, 892, 311, 8624, 33824, 13, 694, 1741, 16, 1822, 1741, 17, 29, 5659, 279, 220, 16, 4771, 20237, 6492, 11, 279, 31397, 11595, 369, 19463, 315, 4648, 574, 220, 16, 13, 1682, 320, 2721, 4, 21351, 11, 220, 15, 13, 4161, 311, 220, 16, 13, 5332, 570, 694, 1741, 17, 1822, 1741, 18, 29, 14636, 3117, 11, 449, 264, 23369, 1833, 5352, 315, 220, 4218, 5672, 11, 23369, 20237, 706, 539, 1027, 8813, 304, 3060, 1912, 13, 694, 1741, 18, 1822, 1741, 19, 29, 29240, 505, 26954, 304, 3892, 4367, 315, 2324, 7482, 1051, 12207, 2204, 320, 47, 366, 477, 284, 220, 15, 13, 1721, 8, 1990, 6514, 5315, 48582, 505, 4038, 220, 16, 311, 220, 21, 11, 323, 682, 46603, 293, 950, 332, 66796, 13, 694, 1741, 19, 1822, 1741, 20, 29, 28993, 11, 279, 7294, 438, 26252, 574, 1664, 66441, 7863, 449, 2211, 55681, 26, 694, 1741, 20, 1822, 1741, 21, 29, 449, 293, 950, 332, 66796, 11, 4106, 18698, 288, 10222, 2753, 3629, 323, 17659, 8541, 29668, 323, 342, 1910, 66274, 561, 689, 810, 3629, 13, 694, 1741, 21, 1822, 1741, 22, 29, 10541, 264, 47040, 315, 220, 1135, 14060, 315, 293, 950, 332, 66796, 3131, 7446, 574, 539, 439, 7524, 439, 2211, 55681, 11, 694, 1741, 22, 1822, 1741, 23, 29, 279, 37849, 4367, 315, 2324, 20124, 323, 279, 3428, 39775, 315, 2536, 71, 494, 25180, 31959, 4455, 3493, 8125, 311, 15806, 293, 950, 332, 66796, 11, 439, 264, 3254, 37471, 8479, 11, 520, 5190, 35130, 13, 694, 1741, 23, 29, 128009, 128006, 78191, 128007, 271, 5018, 8739, 9962, 794, 4482, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 46644, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to classify each argument component in the text as either "Claim" or "Premise". You must return a list of argument component types, strictly of length 8, in following JSON format: {"component_types": ["component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)", "component_type (str)"]} where each element "component_type (str)" is replaced by either "Claim" or "Premise". 
+
+### Here is the abstract text:  Single-agent therapy with bicalutamide, a nonsteroidal antiandrogen, was compared with castration, either surgical or medical, in patients with untreated Stage D2 prostate cancer. In an open, randomized, multicenter trial, patients were randomized to treatment with 50 mg bicalutamide (n = 243) once daily or to castration (n = 243), either orchiectomy or depot injection of goserelin acetate every 28 days. Primary efficacy endpoints were times to treatment failure and objective disease progression and survival. Assessments included review of measurable metastases, prostate dimensions, Eastern Cooperative Oncology Group performance status, pain, analgesic requirements, and quality of life responses. The median duration of therapy was 39 weeks for bicalutamide-treated patients and 42 weeks for castrated patients; treatment failure occurred in 53% and 42% and disease progression in 43% and 33%, respectively.<AC1> Treatment effects favored castration for both endpoints (P < or = 0.002), with hazard ratios (bicalutamide:castration) of 1.54 (95% confidence interval [CI], 1.18 to 2.00) for time to treatment failure and 1.6 (95% CI, 1.19 to 2.15) for time to disease progression. </AC1><AC2> From the 1-year survival analysis, the hazard ratio for probability of death was 1.29 (95% CI, 0.96 to 1.72). </AC2><AC3> Thus far, with a median follow-up of 86 weeks, median survival has not been reached in either group. </AC3><AC4> Changes from baseline in several quality of life variables were significantly different (P < or = 0.01) between treatment groups periodically from months 1 to 6, and all favored bicalutamide. </AC4><AC5> Overall, the antiandrogen was well tolerated compared with castration; </AC5><AC6> with bicalutamide, hot flushes occurred less often and breast tenderness and gynecomastia more often. </AC6><AC7> Although a dosage of 50 mg of bicalutamide once daily was not as effective as castration, </AC7><AC8> the favorable quality of life outcomes and the low incidence of nonhormonal adverse events provide reasons to evaluate bicalutamide, as a single therapeutic agent, at higher doses. </AC8><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"component_types": ["Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Claim"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 8739, 9962, 794, 4482, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 42562, 1082, 498, 330, 46644, 93546, 128009]
+labels:
+{"component_types": ["Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Premise", "Claim"]}<|eot_id|>
+09/07/2024 14:59:59 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 14:59:59 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 14:59:59 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 14:59:59 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 15:05:52 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 15:05:52 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 15:05:52 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 15:05:52 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 15:05:52 - INFO - llamafactory.model.model_utils.misc - Found linear modules: v_proj,k_proj,o_proj,up_proj,q_proj,down_proj,gate_proj
+09/07/2024 15:05:52 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 15:05:52 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 15:05:52 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 15:05:52 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 15:05:52 - INFO - llamafactory.model.model_utils.misc - Found linear modules: down_proj,v_proj,gate_proj,q_proj,k_proj,o_proj,up_proj
+09/07/2024 15:05:55 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/07/2024 15:05:55 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/07/2024 15:05:55 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/07/2024 15:05:55 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.2467, 'grad_norm': 0.18510662019252777, 'learning_rate': 3.181818181818182e-05, 'epoch': 0.45}
+{'loss': 0.0681, 'grad_norm': 0.3799460232257843, 'learning_rate': 4.968597221690986e-05, 'epoch': 0.91}
+{'loss': 0.031, 'grad_norm': 0.17561456561088562, 'learning_rate': 4.7573163457165534e-05, 'epoch': 1.36}
+{'loss': 0.0254, 'grad_norm': 0.19581158459186554, 'learning_rate': 4.309335095262676e-05, 'epoch': 1.82}
+{'loss': 0.0249, 'grad_norm': 0.2898401618003845, 'learning_rate': 3.680677686931707e-05, 'epoch': 2.27}
+{'loss': 0.0243, 'grad_norm': 0.1475094109773636, 'learning_rate': 2.9341204441673266e-05, 'epoch': 2.73}
+{'loss': 0.0142, 'grad_norm': 0.13401663303375244, 'learning_rate': 2.1442129043167874e-05, 'epoch': 3.18}
+{'loss': 0.0096, 'grad_norm': 0.03489222377538681, 'learning_rate': 1.3898334684855647e-05, 'epoch': 3.64}
+{'loss': 0.0103, 'grad_norm': 0.10794167965650558, 'learning_rate': 7.463127807341966e-06, 'epoch': 4.09}
+{'loss': 0.0067, 'grad_norm': 0.16120755672454834, 'learning_rate': 2.779113783626916e-06, 'epoch': 4.55}
+{'loss': 0.0058, 'grad_norm': 0.1382840871810913, 'learning_rate': 3.140277830901428e-07, 'epoch': 5.0}
+{'train_runtime': 4824.4129, 'train_samples_per_second': 0.363, 'train_steps_per_second': 0.023, 'train_loss': 0.042462620443918485, 'epoch': 5.0}
+***** train metrics *****
+  epoch                    =         5.0
+  total_flos               = 499227956GF
+  train_loss               =      0.0425
+  train_runtime            =  1:20:24.41
+  train_samples_per_second =       0.363
+  train_steps_per_second   =       0.023
+09/07/2024 16:26:34 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 16:26:34 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 16:26:34 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 16:26:34 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/07/2024 16:30:26 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 16:30:30 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/finetuned_models/abstRCT_acc_llama-3-70b-Instruct-bnb-4bit
+09/07/2024 16:30:30 - INFO - llamafactory.model.loader - all params: 70,657,253,376
+              precision    recall  f1-score   support
+
+       Claim      0.938     0.911     0.924       248
+     Premise      0.951     0.966     0.959       443
+
+    accuracy                          0.946       691
+   macro avg      0.944     0.939     0.941       691
+weighted avg      0.946     0.946     0.946       691
+
+              precision    recall  f1-score   support
+
+       Claim      0.908     0.880     0.894       191
+     Premise      0.947     0.960     0.953       424
+
+    accuracy                          0.935       615
+   macro avg      0.927     0.920     0.923       615
+weighted avg      0.935     0.935     0.935       615
+
+              precision    recall  f1-score   support
+
+       Claim      0.934     0.929     0.931       212
+     Premise      0.962     0.965     0.964       397
+
+    accuracy                          0.952       609
+   macro avg      0.948     0.947     0.947       609
+weighted avg      0.952     0.952     0.952       609
+
+Successfully ran abstRCT_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit acc 
+ 
+  *************** 
+
+Running abstRCT_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit aric
+09/07/2024 17:05:44 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:21583
+09/07/2024 17:05:57 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 17:05:57 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 17:05:57 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 17:05:57 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/07/2024 17:05:57 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/07/2024 17:05:57 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/07/2024 17:05:58 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 17:05:58 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 17:05:58 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_aric_train_neo.json...
+09/07/2024 17:06:00 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/datasets/abstRCT_aric_train_neo.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 94612, 8278, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 10765, 5811, 4398, 1990, 5811, 6956, 304, 279, 8278, 1495, 323, 49229, 872, 12976, 955, 439, 3060, 330, 24249, 1, 477, 330, 21208, 3343, 1472, 2011, 471, 264, 1160, 315, 24657, 2641, 304, 279, 2768, 4823, 3645, 25, 5324, 1638, 9202, 48084, 9962, 794, 4416, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 705, 12976, 1857, 320, 496, 26090, 61453, 510, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 705, 12976, 1857, 320, 496, 8, 5163, 92, 1405, 1855, 2449, 330, 23013, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 24249, 1, 477, 330, 21208, 11690, 14711, 5810, 374, 279, 8278, 1495, 25, 220, 11579, 43035, 15419, 449, 293, 950, 332, 66796, 11, 264, 2536, 3751, 71916, 7294, 438, 26252, 11, 574, 7863, 449, 2211, 55681, 11, 3060, 34933, 477, 6593, 11, 304, 6978, 449, 83920, 22891, 423, 17, 47447, 9572, 13, 763, 459, 1825, 11, 47341, 11, 92520, 1992, 9269, 11, 6978, 1051, 47341, 311, 6514, 449, 220, 1135, 14060, 293, 950, 332, 66796, 320, 77, 284, 220, 14052, 8, 3131, 7446, 477, 311, 2211, 55681, 320, 77, 284, 220, 14052, 705, 3060, 477, 14946, 72783, 477, 45719, 26127, 315, 342, 24332, 33830, 65802, 349, 1475, 220, 1591, 2919, 13, 26150, 41265, 37442, 1051, 3115, 311, 6514, 8060, 323, 16945, 8624, 33824, 323, 20237, 13, 82935, 1392, 5343, 3477, 315, 66303, 68370, 2315, 11, 47447, 15696, 11, 18516, 86805, 77854, 2508, 5856, 5178, 2704, 11, 6784, 11, 3260, 4282, 292, 8670, 11, 323, 4367, 315, 2324, 14847, 13, 578, 23369, 8250, 315, 15419, 574, 220, 2137, 5672, 369, 293, 950, 332, 66796, 88186, 6978, 323, 220, 2983, 5672, 369, 2211, 496, 660, 6978, 26, 6514, 8060, 10222, 304, 220, 4331, 4, 323, 220, 2983, 4, 323, 8624, 33824, 304, 220, 3391, 4, 323, 220, 1644, 13689, 15947, 16134, 1741, 16, 29, 31969, 6372, 46603, 2211, 55681, 369, 2225, 37442, 320, 47, 366, 477, 284, 220, 15, 13, 6726, 705, 449, 31397, 42338, 320, 65, 950, 332, 66796, 25, 936, 55681, 8, 315, 220, 16, 13, 4370, 320, 2721, 4, 12410, 10074, 510, 11487, 1145, 220, 16, 13, 972, 311, 220, 17, 13, 410, 8, 369, 892, 311, 6514, 8060, 323, 220, 16, 13, 21, 320, 2721, 4, 21351, 11, 220, 16, 13, 777, 311, 220, 17, 13, 868, 8, 369, 892, 311, 8624, 33824, 13, 694, 1741, 16, 1822, 1741, 17, 29, 5659, 279, 220, 16, 4771, 20237, 6492, 11, 279, 31397, 11595, 369, 19463, 315, 4648, 574, 220, 16, 13, 1682, 320, 2721, 4, 21351, 11, 220, 15, 13, 4161, 311, 220, 16, 13, 5332, 570, 694, 1741, 17, 1822, 1741, 18, 29, 14636, 3117, 11, 449, 264, 23369, 1833, 5352, 315, 220, 4218, 5672, 11, 23369, 20237, 706, 539, 1027, 8813, 304, 3060, 1912, 13, 694, 1741, 18, 1822, 1741, 19, 29, 29240, 505, 26954, 304, 3892, 4367, 315, 2324, 7482, 1051, 12207, 2204, 320, 47, 366, 477, 284, 220, 15, 13, 1721, 8, 1990, 6514, 5315, 48582, 505, 4038, 220, 16, 311, 220, 21, 11, 323, 682, 46603, 293, 950, 332, 66796, 13, 694, 1741, 19, 1822, 1741, 20, 29, 28993, 11, 279, 7294, 438, 26252, 574, 1664, 66441, 7863, 449, 2211, 55681, 26, 694, 1741, 20, 1822, 1741, 21, 29, 449, 293, 950, 332, 66796, 11, 4106, 18698, 288, 10222, 2753, 3629, 323, 17659, 8541, 29668, 323, 342, 1910, 66274, 561, 689, 810, 3629, 13, 694, 1741, 21, 1822, 1741, 22, 29, 10541, 264, 47040, 315, 220, 1135, 14060, 315, 293, 950, 332, 66796, 3131, 7446, 574, 539, 439, 7524, 439, 2211, 55681, 11, 694, 1741, 22, 1822, 1741, 23, 29, 279, 37849, 4367, 315, 2324, 20124, 323, 279, 3428, 39775, 315, 2536, 71, 494, 25180, 31959, 4455, 3493, 8125, 311, 15806, 293, 950, 332, 66796, 11, 439, 264, 3254, 37471, 8479, 11, 520, 5190, 35130, 13, 694, 1741, 23, 29, 128009, 128006, 78191, 128007, 271, 5018, 1638, 9202, 48084, 9962, 794, 4416, 16, 11, 220, 23, 11, 330, 21208, 8073, 510, 17, 11, 220, 23, 11, 330, 24249, 8073, 510, 18, 11, 220, 17, 11, 330, 21208, 8073, 510, 19, 11, 220, 23, 11, 330, 24249, 8073, 510, 20, 11, 220, 23, 11, 330, 24249, 8073, 510, 21, 11, 220, 23, 11, 330, 24249, 8073, 510, 22, 11, 220, 23, 11, 330, 21208, 1365, 14316, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a biomedical abstract text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to identify argument relations between argument components in the abstract text and classify their relation type as either "support" or "attack". You must return a list of triplets in the following JSON format: {"list_argument_relation_types": [[source AC (int), target AC (int), relation_type (str)],..., [source AC (int), target AC (int), relation_type (str)]]} where each element "relation_type (str)" is replaced by either "support" or "attack".
+
+### Here is the abstract text:  Single-agent therapy with bicalutamide, a nonsteroidal antiandrogen, was compared with castration, either surgical or medical, in patients with untreated Stage D2 prostate cancer. In an open, randomized, multicenter trial, patients were randomized to treatment with 50 mg bicalutamide (n = 243) once daily or to castration (n = 243), either orchiectomy or depot injection of goserelin acetate every 28 days. Primary efficacy endpoints were times to treatment failure and objective disease progression and survival. Assessments included review of measurable metastases, prostate dimensions, Eastern Cooperative Oncology Group performance status, pain, analgesic requirements, and quality of life responses. The median duration of therapy was 39 weeks for bicalutamide-treated patients and 42 weeks for castrated patients; treatment failure occurred in 53% and 42% and disease progression in 43% and 33%, respectively.<AC1> Treatment effects favored castration for both endpoints (P < or = 0.002), with hazard ratios (bicalutamide:castration) of 1.54 (95% confidence interval [CI], 1.18 to 2.00) for time to treatment failure and 1.6 (95% CI, 1.19 to 2.15) for time to disease progression. </AC1><AC2> From the 1-year survival analysis, the hazard ratio for probability of death was 1.29 (95% CI, 0.96 to 1.72). </AC2><AC3> Thus far, with a median follow-up of 86 weeks, median survival has not been reached in either group. </AC3><AC4> Changes from baseline in several quality of life variables were significantly different (P < or = 0.01) between treatment groups periodically from months 1 to 6, and all favored bicalutamide. </AC4><AC5> Overall, the antiandrogen was well tolerated compared with castration; </AC5><AC6> with bicalutamide, hot flushes occurred less often and breast tenderness and gynecomastia more often. </AC6><AC7> Although a dosage of 50 mg of bicalutamide once daily was not as effective as castration, </AC7><AC8> the favorable quality of life outcomes and the low incidence of nonhormonal adverse events provide reasons to evaluate bicalutamide, as a single therapeutic agent, at higher doses. </AC8><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"list_argument_relation_types": [[1, 8, "attack"], [2, 8, "support"], [3, 2, "attack"], [4, 8, "support"], [5, 8, "support"], [6, 8, "support"], [7, 8, "attack"]]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 1638, 9202, 48084, 9962, 794, 4416, 16, 11, 220, 23, 11, 330, 21208, 8073, 510, 17, 11, 220, 23, 11, 330, 24249, 8073, 510, 18, 11, 220, 17, 11, 330, 21208, 8073, 510, 19, 11, 220, 23, 11, 330, 24249, 8073, 510, 20, 11, 220, 23, 11, 330, 24249, 8073, 510, 21, 11, 220, 23, 11, 330, 24249, 8073, 510, 22, 11, 220, 23, 11, 330, 21208, 1365, 14316, 128009]
+labels:
+{"list_argument_relation_types": [[1, 8, "attack"], [2, 8, "support"], [3, 2, "attack"], [4, 8, "support"], [5, 8, "support"], [6, 8, "support"], [7, 8, "attack"]]}<|eot_id|>
+09/07/2024 17:06:01 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 17:06:01 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 17:06:01 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 17:06:01 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 17:14:39 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 17:14:39 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 17:14:39 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 17:14:39 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 17:14:39 - INFO - llamafactory.model.model_utils.misc - Found linear modules: down_proj,o_proj,gate_proj,up_proj,v_proj,q_proj,k_proj
+09/07/2024 17:14:39 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/07/2024 17:14:39 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 17:14:39 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/07/2024 17:14:39 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/07/2024 17:14:39 - INFO - llamafactory.model.model_utils.misc - Found linear modules: v_proj,up_proj,k_proj,down_proj,o_proj,q_proj,gate_proj
+09/07/2024 17:14:41 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/07/2024 17:14:42 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/07/2024 17:14:42 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/07/2024 17:14:42 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.6381, 'grad_norm': 0.8114332556724548, 'learning_rate': 3.181818181818182e-05, 'epoch': 0.45}
+{'loss': 0.174, 'grad_norm': 0.3053770065307617, 'learning_rate': 4.9548217431567665e-05, 'epoch': 0.91}
+{'loss': 0.1228, 'grad_norm': 0.19485796988010406, 'learning_rate': 4.684623442674463e-05, 'epoch': 1.36}
+{'loss': 0.112, 'grad_norm': 0.21982307732105255, 'learning_rate': 4.1962735288928305e-05, 'epoch': 1.82}
+{'loss': 0.0938, 'grad_norm': 0.14845964312553406, 'learning_rate': 3.5385375325047166e-05, 'epoch': 2.27}
+{'loss': 0.0808, 'grad_norm': 0.2885085940361023, 'learning_rate': 2.7770954997525277e-05, 'epoch': 2.73}
+{'loss': 0.0696, 'grad_norm': 0.2046276032924652, 'learning_rate': 1.9879833298370238e-05, 'epoch': 3.18}
+{'loss': 0.0569, 'grad_norm': 0.22795869410037994, 'learning_rate': 1.2500000000000006e-05, 'epoch': 3.64}
+{'loss': 0.0562, 'grad_norm': 0.24897199869155884, 'learning_rate': 6.368388758106133e-06, 'epoch': 4.09}
+{'loss': 0.0359, 'grad_norm': 0.18909631669521332, 'learning_rate': 2.09728856419826e-06, 'epoch': 4.55}
+{'loss': 0.0367, 'grad_norm': 0.22491788864135742, 'learning_rate': 1.1320193567288529e-07, 'epoch': 5.0}
+{'train_runtime': 4834.5818, 'train_samples_per_second': 0.362, 'train_steps_per_second': 0.023, 'train_loss': 0.1342557343569669, 'epoch': 5.0}
+***** train metrics *****
+  epoch                    =         5.0
+  total_flos               = 500323264GF
+  train_loss               =      0.1343
+  train_runtime            =  1:20:34.58
+  train_samples_per_second =       0.362
+  train_steps_per_second   =       0.023
+09/07/2024 18:35:32 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/07/2024 18:35:32 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/07/2024 18:35:32 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/07/2024 18:35:32 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/07/2024 18:39:45 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/07/2024 18:39:50 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/abstRCT/finetuned_models/abstRCT_aric_llama-3-70b-Instruct-bnb-4bit
+09/07/2024 18:39:50 - INFO - llamafactory.model.loader - all params: 70,657,253,376
+              precision    recall  f1-score   support
+
+        None      0.983     0.978     0.980      6435
+      attack      0.619     0.661     0.639        59
+     support      0.665     0.717     0.690       360
+
+    accuracy                          0.961      6854
+   macro avg      0.756     0.785     0.770      6854
+weighted avg      0.963     0.961     0.962      6854
+
+              precision    recall  f1-score   support
+
+        None      0.985     0.975     0.980      5219
+      attack      0.583     0.500     0.538        28
+     support      0.666     0.779     0.718       317
+
+    accuracy                          0.962      5564
+   macro avg      0.745     0.751     0.745      5564
+weighted avg      0.964     0.962     0.963      5564
+
+              precision    recall  f1-score   support
+
+        None      0.986     0.972     0.979      5176
+      attack      0.517     0.625     0.566        24
+     support      0.629     0.774     0.694       296
+
+    accuracy                          0.960      5496
+   macro avg      0.711     0.790     0.746      5496
+weighted avg      0.964     0.960     0.962      5496
+
+Successfully ran abstRCT_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit aric 
+ 
+  *************** 
+

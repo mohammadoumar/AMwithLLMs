@@ -1,0 +1,776 @@
+Running CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit acc
+09/08/2024 09:56:55 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:27342
+09/08/2024 09:57:05 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 09:57:05 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 09:57:05 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 09:57:05 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 09:57:05 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 09:57:05 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 09:57:06 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 09:57:06 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_acc_train.json...
+09/08/2024 09:57:06 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 09:57:07 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_acc_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 49229, 1855, 5811, 3777, 304, 279, 1495, 439, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 3777, 4595, 11, 26549, 315, 3160, 220, 18, 11, 304, 2768, 4823, 3645, 25, 5324, 8739, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 8739, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 4815, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 16, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 16, 1822, 1741, 17, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 17, 1822, 1741, 18, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 18, 29, 128009, 128006, 78191, 128007, 271, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to classify each argument component in the text as either "fact", "policy", "reference", "testimony" or "value". You must return a list of argument component types, strictly of length 3, in following JSON format: {"component_types": ["component_type (str)", "component_type (str)", "component_type (str)"]} where each element "component_type (str)" is replaced by either "fact", "policy", "reference", "testimony" or "value". 
+
+### Here is the text: <AC1>State and local court rules sometimes make default judgments much more likely.</AC1><AC2> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC2><AC3> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC3><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+labels:
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+09/08/2024 09:57:07 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 09:57:07 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 09:57:07 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 09:57:07 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 09:57:14 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 09:57:14 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 09:57:14 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 09:57:14 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 09:57:14 - INFO - llamafactory.model.model_utils.misc - Found linear modules: v_proj,o_proj,down_proj,up_proj,q_proj,k_proj,gate_proj
+09/08/2024 09:57:14 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 09:57:14 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 09:57:14 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 09:57:14 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 09:57:14 - INFO - llamafactory.model.model_utils.misc - Found linear modules: v_proj,o_proj,gate_proj,q_proj,up_proj,down_proj,k_proj
+09/08/2024 09:57:14 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 09:57:14 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 09:57:15 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 09:57:15 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.435, 'grad_norm': 0.6662536263465881, 'learning_rate': 2.777777777777778e-05, 'epoch': 0.28}
+{'loss': 0.16, 'grad_norm': 1.6069201231002808, 'learning_rate': 4.998119881260576e-05, 'epoch': 0.55}
+{'loss': 0.1477, 'grad_norm': 0.8225740194320679, 'learning_rate': 4.9326121764495596e-05, 'epoch': 0.83}
+{'loss': 0.1092, 'grad_norm': 0.4612680673599243, 'learning_rate': 4.775907352415367e-05, 'epoch': 1.1}
+{'loss': 0.0955, 'grad_norm': 0.7909645438194275, 'learning_rate': 4.533880175657419e-05, 'epoch': 1.38}
+{'loss': 0.0778, 'grad_norm': 0.39721518754959106, 'learning_rate': 4.215604094671835e-05, 'epoch': 1.66}
+{'loss': 0.0795, 'grad_norm': 0.4760516583919525, 'learning_rate': 3.8330110820042285e-05, 'epoch': 1.93}
+{'loss': 0.0509, 'grad_norm': 0.41949766874313354, 'learning_rate': 3.400444312011776e-05, 'epoch': 2.21}
+{'loss': 0.0287, 'grad_norm': 0.4181116223335266, 'learning_rate': 2.9341204441673266e-05, 'epoch': 2.48}
+{'loss': 0.0423, 'grad_norm': 0.5039374828338623, 'learning_rate': 2.4515216705704395e-05, 'epoch': 2.76}
+{'loss': 0.0332, 'grad_norm': 0.4463821351528168, 'learning_rate': 1.970740319426474e-05, 'epoch': 3.03}
+{'loss': 0.0128, 'grad_norm': 0.12132880091667175, 'learning_rate': 1.509800584902108e-05, 'epoch': 3.31}
+{'loss': 0.0126, 'grad_norm': 0.2375297099351883, 'learning_rate': 1.085982811283654e-05, 'epoch': 3.59}
+{'loss': 0.0097, 'grad_norm': 0.20197509229183197, 'learning_rate': 7.1517566360525284e-06, 'epoch': 3.86}
+{'loss': 0.0099, 'grad_norm': 0.45283687114715576, 'learning_rate': 4.112804714676594e-06, 'epoch': 4.14}
+{'loss': 0.0059, 'grad_norm': 0.22654564678668976, 'learning_rate': 1.8569007682777417e-06, 'epoch': 4.41}
+{'loss': 0.0032, 'grad_norm': 0.04814191162586212, 'learning_rate': 4.6861723431538276e-07, 'epoch': 4.69}
+{'loss': 0.0033, 'grad_norm': 0.06259498000144958, 'learning_rate': 0.0, 'epoch': 4.97}
+{'train_runtime': 818.8612, 'train_samples_per_second': 3.542, 'train_steps_per_second': 0.22, 'train_loss': 0.07316920891818073, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =     4.9655
+  total_flos               = 55401222GF
+  train_loss               =     0.0732
+  train_runtime            = 0:13:38.86
+  train_samples_per_second =      3.542
+  train_steps_per_second   =       0.22
+09/08/2024 10:11:02 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:11:03 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 10:11:03 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 10:11:03 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 10:11:05 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:11:06 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_acc_llama-3-8b-Instruct-bnb-4bit
+09/08/2024 10:11:06 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+        fact      0.600     0.705     0.648       132
+      policy      0.907     0.889     0.898       153
+   reference      1.000     1.000     1.000         1
+   testimony      0.917     0.857     0.886       244
+       value      0.860     0.853     0.856       496
+
+    accuracy                          0.840      1026
+   macro avg      0.857     0.861     0.858      1026
+weighted avg      0.847     0.840     0.843      1026
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit acc 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit ari
+09/08/2024 10:17:15 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:20139
+09/08/2024 10:17:25 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 10:17:25 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 10:17:25 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 10:17:25 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 10:17:25 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 10:17:25 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 10:17:26 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:17:26 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_ari_train.json...
+09/08/2024 10:17:26 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:17:27 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_ari_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 10765, 5811, 4398, 1990, 5811, 6956, 304, 279, 1495, 13, 1472, 2011, 471, 264, 1160, 315, 13840, 304, 279, 2768, 4823, 3645, 25, 5324, 1638, 9202, 95321, 794, 4416, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 26090, 61453, 510, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 8, 5163, 633, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 15, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 15, 1822, 1741, 16, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 16, 1822, 1741, 17, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 17, 29, 128009, 128006, 78191, 128007, 271, 5018, 1638, 9202, 95321, 794, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 92, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to identify argument relations between argument components in the text. You must return a list of pairs in the following JSON format: {"list_argument_relations": [[source AC (int), target AC (int)],..., [source AC (int), target AC (int)]]}
+
+### Here is the text: <AC0>State and local court rules sometimes make default judgments much more likely.</AC0><AC1> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC1><AC2> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC2><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"list_argument_relations": [[0, 1], [2, 0]]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 1638, 9202, 95321, 794, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 92, 128009]
+labels:
+{"list_argument_relations": [[0, 1], [2, 0]]}<|eot_id|>
+09/08/2024 10:17:27 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 10:17:27 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 10:17:27 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 10:17:27 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 10:17:33 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 10:17:33 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:17:33 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 10:17:33 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 10:17:33 - INFO - llamafactory.model.model_utils.misc - Found linear modules: v_proj,q_proj,k_proj,gate_proj,up_proj,down_proj,o_proj
+09/08/2024 10:17:33 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 10:17:33 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:17:33 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 10:17:33 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 10:17:33 - INFO - llamafactory.model.model_utils.misc - Found linear modules: v_proj,up_proj,o_proj,down_proj,q_proj,k_proj,gate_proj
+09/08/2024 10:17:33 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 10:17:33 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 10:17:34 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 10:17:34 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.7798, 'grad_norm': 0.8946824669837952, 'learning_rate': 2.5e-05, 'epoch': 0.28}
+{'loss': 0.3367, 'grad_norm': 0.6695331931114197, 'learning_rate': 4.9995299261212536e-05, 'epoch': 0.55}
+{'loss': 0.2859, 'grad_norm': 0.7947115302085876, 'learning_rate': 4.94333464562659e-05, 'epoch': 0.83}
+{'loss': 0.2615, 'grad_norm': 0.6516298055648804, 'learning_rate': 4.7955402672006854e-05, 'epoch': 1.1}
+{'loss': 0.2037, 'grad_norm': 0.7450159192085266, 'learning_rate': 4.561687510272767e-05, 'epoch': 1.38}
+{'loss': 0.1995, 'grad_norm': 0.7747262120246887, 'learning_rate': 4.2505433694179216e-05, 'epoch': 1.66}
+{'loss': 0.2067, 'grad_norm': 1.0551007986068726, 'learning_rate': 3.873772445177015e-05, 'epoch': 1.93}
+{'loss': 0.1586, 'grad_norm': 0.8135303854942322, 'learning_rate': 3.445499645429107e-05, 'epoch': 2.21}
+{'loss': 0.1066, 'grad_norm': 0.8646438121795654, 'learning_rate': 2.9817806513702244e-05, 'epoch': 2.48}
+{'loss': 0.1298, 'grad_norm': 0.6445282697677612, 'learning_rate': 2.5e-05, 'epoch': 2.76}
+{'loss': 0.1177, 'grad_norm': 0.984649121761322, 'learning_rate': 2.0182193486297755e-05, 'epoch': 3.03}
+{'loss': 0.0676, 'grad_norm': 0.6317119002342224, 'learning_rate': 1.554500354570894e-05, 'epoch': 3.31}
+{'loss': 0.0617, 'grad_norm': 0.8318309187889099, 'learning_rate': 1.126227554822985e-05, 'epoch': 3.59}
+{'loss': 0.0432, 'grad_norm': 0.7377147078514099, 'learning_rate': 7.494566305820788e-06, 'epoch': 3.86}
+{'loss': 0.0419, 'grad_norm': 0.4767099618911743, 'learning_rate': 4.383124897272331e-06, 'epoch': 4.14}
+{'loss': 0.0217, 'grad_norm': 1.2229655981063843, 'learning_rate': 2.044597327993153e-06, 'epoch': 4.41}
+{'loss': 0.0231, 'grad_norm': 0.44673770666122437, 'learning_rate': 5.666535437341108e-07, 'epoch': 4.69}
+{'loss': 0.022, 'grad_norm': 0.45773226022720337, 'learning_rate': 4.700738787466463e-09, 'epoch': 4.97}
+{'train_runtime': 720.4298, 'train_samples_per_second': 4.025, 'train_steps_per_second': 0.25, 'train_loss': 0.1704205416970783, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =     4.9655
+  total_flos               = 44833838GF
+  train_loss               =     0.1704
+  train_runtime            = 0:12:00.42
+  train_samples_per_second =      4.025
+  train_steps_per_second   =       0.25
+09/08/2024 10:29:43 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:29:43 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 10:29:43 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 10:29:43 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 10:29:46 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:29:46 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_ari_llama-3-8b-Instruct-bnb-4bit
+09/08/2024 10:29:46 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+       N-Rel      0.980     0.985     0.982     10004
+         Rel      0.448     0.386     0.415       324
+
+    accuracy                          0.966     10328
+   macro avg      0.714     0.685     0.698     10328
+weighted avg      0.964     0.966     0.965     10328
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit ari 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit arc
+09/08/2024 10:34:17 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:29635
+09/08/2024 10:34:27 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 10:34:27 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 10:34:27 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 10:34:27 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 10:34:27 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 10:34:27 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 10:34:28 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:34:28 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_arc_train.json...
+09/08/2024 10:34:28 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:34:29 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_arc_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 1472, 527, 1101, 2728, 264, 1160, 315, 13840, 315, 5552, 5811, 6956, 304, 279, 1376, 25, 18305, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 5850, 320, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 5850, 61453, 320, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 595, 948, 4718, 3465, 374, 311, 49229, 1855, 6857, 315, 5552, 5811, 6956, 304, 279, 1160, 439, 3060, 330, 20489, 1, 477, 330, 68, 28580, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 12976, 4595, 11, 26549, 315, 3160, 220, 17, 11, 304, 2768, 4823, 3645, 25, 5324, 23013, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 23013, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 20489, 1, 477, 330, 68, 28580, 3343, 4815, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 16, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 16, 1822, 1741, 17, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 17, 1822, 1741, 18, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 18, 397, 14711, 5810, 374, 279, 1160, 315, 13840, 315, 5552, 5811, 6956, 304, 420, 14646, 25, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 128009, 128006, 78191, 128007, 271, 5018, 23013, 9962, 794, 4482, 20489, 498, 330, 20489, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. You are also given a list of pairs of related argument components in the form: [(target AC (int), source AC (int)), (target AC (int), source AC (int)),..., (target AC (int), source AC (int))]. Your task is to classify each pair of related argument components in the list as either "reason" or "evidence". You must return a list of argument relation types, strictly of length 2, in following JSON format: {"relation_types": ["component_type (str)", "component_type (str)"]} where each element "relation_type (str)" is replaced by either "reason" or "evidence". 
+
+### Here is the text: <AC1>State and local court rules sometimes make default judgments much more likely.</AC1><AC2> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC2><AC3> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC3>
+### Here is the list of pairs of related argument components in this paragraph: [[0, 1], [2, 0]]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"relation_types": ["reason", "reason"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 23013, 9962, 794, 4482, 20489, 498, 330, 20489, 93546, 128009]
+labels:
+{"relation_types": ["reason", "reason"]}<|eot_id|>
+09/08/2024 10:34:29 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 10:34:29 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 10:34:29 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 10:34:29 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 10:34:35 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 10:34:35 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:34:35 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 10:34:35 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 10:34:35 - INFO - llamafactory.model.model_utils.misc - Found linear modules: gate_proj,o_proj,v_proj,down_proj,up_proj,q_proj,k_proj
+09/08/2024 10:34:35 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 10:34:35 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:34:35 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 10:34:35 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 10:34:35 - INFO - llamafactory.model.model_utils.misc - Found linear modules: gate_proj,k_proj,v_proj,down_proj,o_proj,up_proj,q_proj
+09/08/2024 10:34:36 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 10:34:36 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 10:34:36 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 10:34:36 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.3743, 'grad_norm': 0.18681399524211884, 'learning_rate': 2.777777777777778e-05, 'epoch': 0.28}
+{'loss': 0.0247, 'grad_norm': 2.9739670753479004, 'learning_rate': 4.9995299261212536e-05, 'epoch': 0.55}
+{'loss': 0.0236, 'grad_norm': 0.08163577318191528, 'learning_rate': 4.94333464562659e-05, 'epoch': 0.83}
+{'loss': 0.0232, 'grad_norm': 0.7151684165000916, 'learning_rate': 4.7955402672006854e-05, 'epoch': 1.1}
+{'loss': 0.0174, 'grad_norm': 0.3132418096065521, 'learning_rate': 4.561687510272767e-05, 'epoch': 1.38}
+{'loss': 0.0279, 'grad_norm': 0.1650991141796112, 'learning_rate': 4.2505433694179216e-05, 'epoch': 1.66}
+{'loss': 0.0199, 'grad_norm': 0.2697801887989044, 'learning_rate': 3.873772445177015e-05, 'epoch': 1.93}
+{'loss': 0.0193, 'grad_norm': 0.3094712495803833, 'learning_rate': 3.445499645429107e-05, 'epoch': 2.21}
+{'loss': 0.0143, 'grad_norm': 0.053719423711299896, 'learning_rate': 2.9817806513702244e-05, 'epoch': 2.48}
+{'loss': 0.0125, 'grad_norm': 0.06411638855934143, 'learning_rate': 2.5e-05, 'epoch': 2.76}
+{'loss': 0.014, 'grad_norm': 0.31442415714263916, 'learning_rate': 2.0182193486297755e-05, 'epoch': 3.03}
+{'loss': 0.0091, 'grad_norm': 0.16420544683933258, 'learning_rate': 1.554500354570894e-05, 'epoch': 3.31}
+{'loss': 0.0076, 'grad_norm': 0.18842534720897675, 'learning_rate': 1.126227554822985e-05, 'epoch': 3.59}
+{'loss': 0.0047, 'grad_norm': 0.006846261210739613, 'learning_rate': 7.494566305820788e-06, 'epoch': 3.86}
+{'loss': 0.0095, 'grad_norm': 0.4073188602924347, 'learning_rate': 4.383124897272331e-06, 'epoch': 4.14}
+{'loss': 0.0024, 'grad_norm': 0.02801213227212429, 'learning_rate': 2.044597327993153e-06, 'epoch': 4.41}
+{'loss': 0.0032, 'grad_norm': 0.022135954350233078, 'learning_rate': 5.666535437341108e-07, 'epoch': 4.69}
+{'loss': 0.007, 'grad_norm': 0.15221932530403137, 'learning_rate': 4.700738787466463e-09, 'epoch': 4.97}
+{'train_runtime': 808.0418, 'train_samples_per_second': 3.589, 'train_steps_per_second': 0.223, 'train_loss': 0.03414440508931875, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =     4.9655
+  total_flos               = 56202608GF
+  train_loss               =     0.0341
+  train_runtime            = 0:13:28.04
+  train_samples_per_second =      3.589
+  train_steps_per_second   =      0.223
+09/08/2024 10:48:10 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:48:10 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 10:48:10 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 10:48:10 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 10:48:13 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:48:13 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_arc_llama-3-8b-Instruct-bnb-4bit
+09/08/2024 10:48:13 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+    evidence      1.000     0.308     0.471        26
+      reason      0.943     1.000     0.971       298
+
+    accuracy                          0.944       324
+   macro avg      0.972     0.654     0.721       324
+weighted avg      0.948     0.944     0.931       324
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct-bnb-4bit arc 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct acc
+09/08/2024 10:51:32 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:26995
+09/08/2024 10:51:42 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 10:51:42 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 10:51:42 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 10:51:42 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 10:51:42 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 10:51:42 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 10:51:43 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:51:43 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_acc_train.json...
+09/08/2024 10:51:43 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 10:51:44 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_acc_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 49229, 1855, 5811, 3777, 304, 279, 1495, 439, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 3777, 4595, 11, 26549, 315, 3160, 220, 18, 11, 304, 2768, 4823, 3645, 25, 5324, 8739, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 8739, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 4815, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 16, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 16, 1822, 1741, 17, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 17, 1822, 1741, 18, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 18, 29, 128009, 128006, 78191, 128007, 271, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to classify each argument component in the text as either "fact", "policy", "reference", "testimony" or "value". You must return a list of argument component types, strictly of length 3, in following JSON format: {"component_types": ["component_type (str)", "component_type (str)", "component_type (str)"]} where each element "component_type (str)" is replaced by either "fact", "policy", "reference", "testimony" or "value". 
+
+### Here is the text: <AC1>State and local court rules sometimes make default judgments much more likely.</AC1><AC2> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC2><AC3> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC3><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+labels:
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+09/08/2024 10:51:44 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 10:51:44 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 10:52:16 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 10:52:16 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:52:16 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 10:52:16 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 10:52:16 - INFO - llamafactory.model.model_utils.misc - Found linear modules: o_proj,up_proj,down_proj,gate_proj,k_proj,q_proj,v_proj
+09/08/2024 10:52:16 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 10:52:16 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 10:52:16 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 10:52:16 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 10:52:16 - INFO - llamafactory.model.model_utils.misc - Found linear modules: up_proj,k_proj,down_proj,q_proj,gate_proj,o_proj,v_proj
+09/08/2024 10:52:17 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 10:52:17 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 10:52:17 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 10:52:17 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.4344, 'grad_norm': 0.6703407764434814, 'learning_rate': 2.777777777777778e-05, 'epoch': 0.28}
+{'loss': 0.1595, 'grad_norm': 1.5315263271331787, 'learning_rate': 4.998119881260576e-05, 'epoch': 0.55}
+{'loss': 0.148, 'grad_norm': 0.6825730204582214, 'learning_rate': 4.9326121764495596e-05, 'epoch': 0.83}
+{'loss': 0.1022, 'grad_norm': 0.571783721446991, 'learning_rate': 4.775907352415367e-05, 'epoch': 1.1}
+{'loss': 0.0919, 'grad_norm': 1.09308922290802, 'learning_rate': 4.561687510272767e-05, 'epoch': 1.38}
+{'loss': 0.0778, 'grad_norm': 0.44037899374961853, 'learning_rate': 4.2505433694179216e-05, 'epoch': 1.66}
+{'loss': 0.0817, 'grad_norm': 0.4176676869392395, 'learning_rate': 3.873772445177015e-05, 'epoch': 1.93}
+{'loss': 0.0526, 'grad_norm': 0.38889604806900024, 'learning_rate': 3.445499645429107e-05, 'epoch': 2.21}
+{'loss': 0.0347, 'grad_norm': 0.9068081974983215, 'learning_rate': 2.9817806513702244e-05, 'epoch': 2.48}
+{'loss': 0.0477, 'grad_norm': 0.5727452039718628, 'learning_rate': 2.5e-05, 'epoch': 2.76}
+{'loss': 0.04, 'grad_norm': 0.5813000202178955, 'learning_rate': 2.0182193486297755e-05, 'epoch': 3.03}
+{'loss': 0.0145, 'grad_norm': 0.12093654274940491, 'learning_rate': 1.554500354570894e-05, 'epoch': 3.31}
+{'loss': 0.0183, 'grad_norm': 0.37337037920951843, 'learning_rate': 1.126227554822985e-05, 'epoch': 3.59}
+{'loss': 0.0121, 'grad_norm': 0.08637222647666931, 'learning_rate': 7.494566305820788e-06, 'epoch': 3.86}
+{'loss': 0.0123, 'grad_norm': 0.4408807158470154, 'learning_rate': 4.383124897272331e-06, 'epoch': 4.14}
+{'loss': 0.0072, 'grad_norm': 0.23136472702026367, 'learning_rate': 2.044597327993153e-06, 'epoch': 4.41}
+{'loss': 0.0042, 'grad_norm': 0.0650145635008812, 'learning_rate': 5.666535437341108e-07, 'epoch': 4.69}
+{'loss': 0.0044, 'grad_norm': 0.06810598820447922, 'learning_rate': 4.700738787466463e-09, 'epoch': 4.97}
+{'train_runtime': 714.2818, 'train_samples_per_second': 4.06, 'train_steps_per_second': 0.252, 'train_loss': 0.07464038820730315, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =     4.9655
+  total_flos               = 55401222GF
+  train_loss               =     0.0746
+  train_runtime            = 0:11:54.28
+  train_samples_per_second =       4.06
+  train_steps_per_second   =      0.252
+09/08/2024 11:04:20 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:04:20 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 11:04:20 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 11:04:26 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:04:27 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_acc_llama-3-8b-Instruct
+09/08/2024 11:04:27 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+        fact      0.619     0.727     0.669       132
+      policy      0.870     0.876     0.873       153
+   reference      1.000     1.000     1.000         1
+   testimony      0.928     0.902     0.915       244
+       value      0.875     0.845     0.859       496
+
+    accuracy                          0.848      1026
+   macro avg      0.858     0.870     0.863      1026
+weighted avg      0.854     0.848     0.850      1026
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct acc 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct ari
+09/08/2024 11:10:28 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:26026
+09/08/2024 11:10:38 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 11:10:38 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 11:10:38 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 11:10:38 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 11:10:38 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 11:10:38 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 11:10:39 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:10:39 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_ari_train.json...
+09/08/2024 11:10:39 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:10:40 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_ari_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 10765, 5811, 4398, 1990, 5811, 6956, 304, 279, 1495, 13, 1472, 2011, 471, 264, 1160, 315, 13840, 304, 279, 2768, 4823, 3645, 25, 5324, 1638, 9202, 95321, 794, 4416, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 26090, 61453, 510, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 8, 5163, 633, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 15, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 15, 1822, 1741, 16, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 16, 1822, 1741, 17, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 17, 29, 128009, 128006, 78191, 128007, 271, 5018, 1638, 9202, 95321, 794, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 92, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to identify argument relations between argument components in the text. You must return a list of pairs in the following JSON format: {"list_argument_relations": [[source AC (int), target AC (int)],..., [source AC (int), target AC (int)]]}
+
+### Here is the text: <AC0>State and local court rules sometimes make default judgments much more likely.</AC0><AC1> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC1><AC2> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC2><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"list_argument_relations": [[0, 1], [2, 0]]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 1638, 9202, 95321, 794, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 92, 128009]
+labels:
+{"list_argument_relations": [[0, 1], [2, 0]]}<|eot_id|>
+09/08/2024 11:10:41 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 11:10:41 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 11:11:01 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 11:11:01 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:11:01 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 11:11:01 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 11:11:01 - INFO - llamafactory.model.model_utils.misc - Found linear modules: up_proj,gate_proj,q_proj,k_proj,v_proj,down_proj,o_proj
+09/08/2024 11:11:01 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 11:11:01 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:11:01 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 11:11:01 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 11:11:01 - INFO - llamafactory.model.model_utils.misc - Found linear modules: q_proj,gate_proj,up_proj,v_proj,o_proj,k_proj,down_proj
+09/08/2024 11:11:02 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 11:11:02 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 11:11:02 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 11:11:02 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.7791, 'grad_norm': 0.8963186144828796, 'learning_rate': 2.5e-05, 'epoch': 0.28}
+{'loss': 0.3373, 'grad_norm': 0.6524924039840698, 'learning_rate': 4.9995299261212536e-05, 'epoch': 0.55}
+{'loss': 0.2857, 'grad_norm': 0.7399117350578308, 'learning_rate': 4.94333464562659e-05, 'epoch': 0.83}
+{'loss': 0.2618, 'grad_norm': 0.6274620294570923, 'learning_rate': 4.7955402672006854e-05, 'epoch': 1.1}
+{'loss': 0.2033, 'grad_norm': 0.8619977831840515, 'learning_rate': 4.561687510272767e-05, 'epoch': 1.38}
+{'loss': 0.2024, 'grad_norm': 0.7823495268821716, 'learning_rate': 4.2505433694179216e-05, 'epoch': 1.66}
+{'loss': 0.2093, 'grad_norm': 1.0204992294311523, 'learning_rate': 3.873772445177015e-05, 'epoch': 1.93}
+{'loss': 0.1581, 'grad_norm': 0.776530921459198, 'learning_rate': 3.445499645429107e-05, 'epoch': 2.21}
+{'loss': 0.1054, 'grad_norm': 0.8628919124603271, 'learning_rate': 2.9817806513702244e-05, 'epoch': 2.48}
+{'loss': 0.1302, 'grad_norm': 0.7139824032783508, 'learning_rate': 2.5e-05, 'epoch': 2.76}
+{'loss': 0.1181, 'grad_norm': 0.8059537410736084, 'learning_rate': 2.0182193486297755e-05, 'epoch': 3.03}
+{'loss': 0.0705, 'grad_norm': 0.8845242857933044, 'learning_rate': 1.554500354570894e-05, 'epoch': 3.31}
+{'loss': 0.0637, 'grad_norm': 1.0707906484603882, 'learning_rate': 1.126227554822985e-05, 'epoch': 3.59}
+{'loss': 0.051, 'grad_norm': 0.8256301879882812, 'learning_rate': 7.494566305820788e-06, 'epoch': 3.86}
+{'loss': 0.0462, 'grad_norm': 0.5058120489120483, 'learning_rate': 4.383124897272331e-06, 'epoch': 4.14}
+{'loss': 0.0232, 'grad_norm': 0.47287899255752563, 'learning_rate': 2.044597327993153e-06, 'epoch': 4.41}
+{'loss': 0.0288, 'grad_norm': 0.37143564224243164, 'learning_rate': 5.666535437341108e-07, 'epoch': 4.69}
+{'loss': 0.025, 'grad_norm': 0.41092848777770996, 'learning_rate': 4.700738787466463e-09, 'epoch': 4.97}
+{'train_runtime': 634.9261, 'train_samples_per_second': 4.567, 'train_steps_per_second': 0.283, 'train_loss': 0.17218367076582378, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =     4.9655
+  total_flos               = 44833838GF
+  train_loss               =     0.1722
+  train_runtime            = 0:10:34.92
+  train_samples_per_second =      4.567
+  train_steps_per_second   =      0.283
+09/08/2024 11:21:46 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:21:46 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 11:21:46 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 11:21:52 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:21:52 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_ari_llama-3-8b-Instruct
+09/08/2024 11:21:52 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+       N-Rel      0.980     0.983     0.982     10004
+         Rel      0.424     0.386     0.404       324
+
+    accuracy                          0.964     10328
+   macro avg      0.702     0.684     0.693     10328
+weighted avg      0.963     0.964     0.963     10328
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct ari 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct arc
+09/08/2024 11:26:17 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:29596
+09/08/2024 11:26:27 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 11:26:27 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 11:26:27 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 11:26:27 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 11:26:27 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 11:26:27 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 11:26:27 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:26:27 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_arc_train.json...
+09/08/2024 11:26:27 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:26:28 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_arc_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 1472, 527, 1101, 2728, 264, 1160, 315, 13840, 315, 5552, 5811, 6956, 304, 279, 1376, 25, 18305, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 5850, 320, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 5850, 61453, 320, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 595, 948, 4718, 3465, 374, 311, 49229, 1855, 6857, 315, 5552, 5811, 6956, 304, 279, 1160, 439, 3060, 330, 20489, 1, 477, 330, 68, 28580, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 12976, 4595, 11, 26549, 315, 3160, 220, 17, 11, 304, 2768, 4823, 3645, 25, 5324, 23013, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 23013, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 20489, 1, 477, 330, 68, 28580, 3343, 4815, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 16, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 16, 1822, 1741, 17, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 17, 1822, 1741, 18, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 18, 397, 14711, 5810, 374, 279, 1160, 315, 13840, 315, 5552, 5811, 6956, 304, 420, 14646, 25, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 128009, 128006, 78191, 128007, 271, 5018, 23013, 9962, 794, 4482, 20489, 498, 330, 20489, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. You are also given a list of pairs of related argument components in the form: [(target AC (int), source AC (int)), (target AC (int), source AC (int)),..., (target AC (int), source AC (int))]. Your task is to classify each pair of related argument components in the list as either "reason" or "evidence". You must return a list of argument relation types, strictly of length 2, in following JSON format: {"relation_types": ["component_type (str)", "component_type (str)"]} where each element "relation_type (str)" is replaced by either "reason" or "evidence". 
+
+### Here is the text: <AC1>State and local court rules sometimes make default judgments much more likely.</AC1><AC2> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC2><AC3> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC3>
+### Here is the list of pairs of related argument components in this paragraph: [[0, 1], [2, 0]]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"relation_types": ["reason", "reason"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 23013, 9962, 794, 4482, 20489, 498, 330, 20489, 93546, 128009]
+labels:
+{"relation_types": ["reason", "reason"]}<|eot_id|>
+09/08/2024 11:26:29 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 11:26:29 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 11:26:49 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 11:26:49 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:26:49 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 11:26:49 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 11:26:49 - INFO - llamafactory.model.model_utils.misc - Found linear modules: o_proj,q_proj,gate_proj,up_proj,down_proj,k_proj,v_proj
+09/08/2024 11:26:50 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 11:26:50 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:26:50 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 11:26:50 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 11:26:50 - INFO - llamafactory.model.model_utils.misc - Found linear modules: gate_proj,o_proj,q_proj,v_proj,up_proj,down_proj,k_proj
+09/08/2024 11:26:50 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 11:26:50 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 11:26:50 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/08/2024 11:26:51 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.3738, 'grad_norm': 0.18500229716300964, 'learning_rate': 2.777777777777778e-05, 'epoch': 0.28}
+{'loss': 0.0162, 'grad_norm': 0.02294151671230793, 'learning_rate': 4.998119881260576e-05, 'epoch': 0.55}
+{'loss': 0.0196, 'grad_norm': 0.09977878630161285, 'learning_rate': 4.9326121764495596e-05, 'epoch': 0.83}
+{'loss': 0.0224, 'grad_norm': 0.35792943835258484, 'learning_rate': 4.775907352415367e-05, 'epoch': 1.1}
+{'loss': 0.0123, 'grad_norm': 0.5822701454162598, 'learning_rate': 4.533880175657419e-05, 'epoch': 1.38}
+{'loss': 0.0217, 'grad_norm': 0.0454610213637352, 'learning_rate': 4.215604094671835e-05, 'epoch': 1.66}
+{'loss': 0.0178, 'grad_norm': 0.15913359820842743, 'learning_rate': 3.8330110820042285e-05, 'epoch': 1.93}
+{'loss': 0.008, 'grad_norm': 0.37644660472869873, 'learning_rate': 3.400444312011776e-05, 'epoch': 2.21}
+{'loss': 0.0083, 'grad_norm': 0.015648910775780678, 'learning_rate': 2.9341204441673266e-05, 'epoch': 2.48}
+{'loss': 0.0124, 'grad_norm': nan, 'learning_rate': 2.548478329429561e-05, 'epoch': 2.76}
+{'loss': 0.0082, 'grad_norm': 0.07318663597106934, 'learning_rate': 2.0658795558326743e-05, 'epoch': 3.03}
+{'loss': 0.0026, 'grad_norm': 0.025243841111660004, 'learning_rate': 1.5995556879882246e-05, 'epoch': 3.31}
+{'loss': 0.0231, 'grad_norm': 0.07523096352815628, 'learning_rate': 1.2082515721203427e-05, 'epoch': 3.59}
+{'loss': 0.0015, 'grad_norm': 0.006169922649860382, 'learning_rate': 8.19980348611194e-06, 'epoch': 3.86}
+{'loss': 0.0022, 'grad_norm': 0.09322217106819153, 'learning_rate': 4.946920181123904e-06, 'epoch': 4.14}
+{'loss': 0.0004, 'grad_norm': 0.005765432026237249, 'learning_rate': 2.445814380474057e-06, 'epoch': 4.41}
+{'loss': 0.0003, 'grad_norm': 0.006522579118609428, 'learning_rate': 7.902509868048552e-07, 'epoch': 4.69}
+{'loss': 0.0006, 'grad_norm': 0.05169744789600372, 'learning_rate': 4.229604321829561e-08, 'epoch': 4.97}
+{'train_runtime': 696.9498, 'train_samples_per_second': 4.161, 'train_steps_per_second': 0.258, 'train_loss': 0.030631550250109284, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =     4.9655
+  total_flos               = 56202608GF
+  train_loss               =     0.0306
+  train_runtime            = 0:11:36.94
+  train_samples_per_second =      4.161
+  train_steps_per_second   =      0.258
+09/08/2024 11:38:34 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:38:34 - INFO - llamafactory.model.model_utils.quantization - Quantizing model to 4 bit with bitsandbytes.
+09/08/2024 11:38:34 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 11:38:41 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:38:41 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_arc_llama-3-8b-Instruct
+09/08/2024 11:38:41 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+    evidence      0.000     0.000     0.000        26
+      reason      0.920     0.997     0.957       298
+
+    accuracy                          0.917       324
+   macro avg      0.460     0.498     0.478       324
+weighted avg      0.846     0.917     0.880       324
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-8b-Instruct arc 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit acc
+09/08/2024 11:41:50 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:23387
+09/08/2024 11:42:00 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 11:42:00 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 11:42:00 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 11:42:01 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 11:42:01 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 11:42:01 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 11:42:01 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:42:01 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 11:42:01 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_acc_train.json...
+09/08/2024 11:42:02 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_acc_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 49229, 1855, 5811, 3777, 304, 279, 1495, 439, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 3777, 4595, 11, 26549, 315, 3160, 220, 18, 11, 304, 2768, 4823, 3645, 25, 5324, 8739, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 8739, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 4815, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 16, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 16, 1822, 1741, 17, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 17, 1822, 1741, 18, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 18, 29, 128009, 128006, 78191, 128007, 271, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to classify each argument component in the text as either "fact", "policy", "reference", "testimony" or "value". You must return a list of argument component types, strictly of length 3, in following JSON format: {"component_types": ["component_type (str)", "component_type (str)", "component_type (str)"]} where each element "component_type (str)" is replaced by either "fact", "policy", "reference", "testimony" or "value". 
+
+### Here is the text: <AC1>State and local court rules sometimes make default judgments much more likely.</AC1><AC2> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC2><AC3> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC3><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+labels:
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+09/08/2024 11:42:03 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 11:42:03 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 11:42:03 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 11:42:03 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 11:47:56 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 11:47:56 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:47:56 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 11:47:56 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 11:47:56 - INFO - llamafactory.model.model_utils.misc - Found linear modules: k_proj,o_proj,q_proj,down_proj,v_proj,gate_proj,up_proj
+09/08/2024 11:47:56 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 11:47:56 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 11:47:56 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 11:47:56 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 11:47:56 - INFO - llamafactory.model.model_utils.misc - Found linear modules: down_proj,q_proj,k_proj,v_proj,o_proj,up_proj,gate_proj
+09/08/2024 11:47:58 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/08/2024 11:47:58 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/08/2024 11:47:58 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 11:47:59 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.6771, 'grad_norm': 0.6283690929412842, 'learning_rate': 1.6666666666666667e-05, 'epoch': 0.28}
+{'loss': 0.2011, 'grad_norm': 0.42589622735977173, 'learning_rate': 4.4444444444444447e-05, 'epoch': 0.55}
+{'loss': 0.1553, 'grad_norm': 0.6353194117546082, 'learning_rate': 4.969974623692023e-05, 'epoch': 0.83}
+{'loss': 0.1102, 'grad_norm': 0.6972475647926331, 'learning_rate': 4.849231551964771e-05, 'epoch': 1.1}
+{'loss': 0.1018, 'grad_norm': 0.39721858501434326, 'learning_rate': 4.640417248825667e-05, 'epoch': 1.38}
+{'loss': 0.0926, 'grad_norm': 0.25326913595199585, 'learning_rate': 4.351360032772512e-05, 'epoch': 1.66}
+{'loss': 0.0842, 'grad_norm': 0.30754610896110535, 'learning_rate': 3.9928964792569655e-05, 'epoch': 1.93}
+{'loss': 0.0612, 'grad_norm': 0.21109546720981598, 'learning_rate': 3.578465164203134e-05, 'epoch': 2.21}
+{'loss': 0.0435, 'grad_norm': 0.3929811716079712, 'learning_rate': 3.1236028601449534e-05, 'epoch': 2.48}
+{'loss': 0.051, 'grad_norm': 0.21123701333999634, 'learning_rate': 2.6453620722761896e-05, 'epoch': 2.76}
+{'loss': 0.0438, 'grad_norm': 0.4872909188270569, 'learning_rate': 2.161671750624673e-05, 'epoch': 3.03}
+{'loss': 0.0198, 'grad_norm': 0.051721543073654175, 'learning_rate': 1.690665144854198e-05, 'epoch': 3.31}
+{'loss': 0.0215, 'grad_norm': 0.1702037751674652, 'learning_rate': 1.2500000000000006e-05, 'epoch': 3.59}
+{'loss': 0.0211, 'grad_norm': 0.13227517902851105, 'learning_rate': 8.561965785773413e-06, 'epoch': 3.86}
+{'loss': 0.0146, 'grad_norm': 0.28908103704452515, 'learning_rate': 5.240183262031021e-06, 'epoch': 4.14}
+{'loss': 0.0116, 'grad_norm': 0.21725745499134064, 'learning_rate': 2.659183991914696e-06, 'epoch': 4.41}
+{'loss': 0.0061, 'grad_norm': 0.0638885349035263, 'learning_rate': 9.157280346029918e-07, 'epoch': 4.69}
+{'loss': 0.0064, 'grad_norm': 0.09058506786823273, 'learning_rate': 7.51764708051994e-08, 'epoch': 4.97}
+{'train_runtime': 5926.1099, 'train_samples_per_second': 0.489, 'train_steps_per_second': 0.03, 'train_loss': 0.0957267497976621, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =      4.9655
+  total_flos               = 512402722GF
+  train_loss               =      0.0957
+  train_runtime            =  1:38:46.10
+  train_samples_per_second =       0.489
+  train_steps_per_second   =        0.03
+09/08/2024 13:26:58 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 13:26:58 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 13:26:58 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 13:26:58 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 13:30:53 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 13:30:58 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_acc_llama-3-70b-Instruct-bnb-4bit
+09/08/2024 13:30:58 - INFO - llamafactory.model.loader - all params: 70,657,253,376
+              precision    recall  f1-score   support
+
+        fact      0.630     0.735     0.678       132
+      policy      0.927     0.915     0.921       153
+   reference      1.000     1.000     1.000         1
+   testimony      0.918     0.873     0.895       244
+       value      0.871     0.857     0.864       496
+
+    accuracy                          0.854      1026
+   macro avg      0.869     0.876     0.872      1026
+weighted avg      0.860     0.854     0.856      1026
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit acc 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit ari
+09/08/2024 13:46:58 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:29512
+09/08/2024 13:47:09 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 13:47:09 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 13:47:09 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 13:47:09 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 13:47:09 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 13:47:09 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 13:47:09 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 13:47:09 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 13:47:09 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_ari_train.json...
+09/08/2024 13:47:11 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_ari_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 10765, 5811, 4398, 1990, 5811, 6956, 304, 279, 1495, 13, 1472, 2011, 471, 264, 1160, 315, 13840, 304, 279, 2768, 4823, 3645, 25, 5324, 1638, 9202, 95321, 794, 4416, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 26090, 61453, 510, 2484, 10807, 320, 396, 705, 2218, 10807, 320, 396, 8, 5163, 633, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 15, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 15, 1822, 1741, 16, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 16, 1822, 1741, 17, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 17, 29, 128009, 128006, 78191, 128007, 271, 5018, 1638, 9202, 95321, 794, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 92, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to identify argument relations between argument components in the text. You must return a list of pairs in the following JSON format: {"list_argument_relations": [[source AC (int), target AC (int)],..., [source AC (int), target AC (int)]]}
+
+### Here is the text: <AC0>State and local court rules sometimes make default judgments much more likely.</AC0><AC1> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC1><AC2> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC2><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"list_argument_relations": [[0, 1], [2, 0]]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 1638, 9202, 95321, 794, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 92, 128009]
+labels:
+{"list_argument_relations": [[0, 1], [2, 0]]}<|eot_id|>
+09/08/2024 13:47:12 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 13:47:12 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 13:47:12 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 13:47:12 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 13:53:05 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 13:53:05 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 13:53:05 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 13:53:05 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 13:53:05 - INFO - llamafactory.model.model_utils.misc - Found linear modules: down_proj,up_proj,q_proj,o_proj,gate_proj,k_proj,v_proj
+09/08/2024 13:53:05 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 13:53:05 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 13:53:05 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 13:53:05 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 13:53:05 - INFO - llamafactory.model.model_utils.misc - Found linear modules: k_proj,down_proj,q_proj,up_proj,o_proj,gate_proj,v_proj
+09/08/2024 13:53:07 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/08/2024 13:53:08 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/08/2024 13:53:08 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 13:53:08 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 1.7132, 'grad_norm': 0.9173390865325928, 'learning_rate': 1.6666666666666667e-05, 'epoch': 0.28}
+{'loss': 0.3707, 'grad_norm': 0.4085385203361511, 'learning_rate': 4.4444444444444447e-05, 'epoch': 0.55}
+{'loss': 0.2772, 'grad_norm': 0.2800758183002472, 'learning_rate': 4.977001008412113e-05, 'epoch': 0.83}
+{'loss': 0.2488, 'grad_norm': 0.31566062569618225, 'learning_rate': 4.8653703921893766e-05, 'epoch': 1.1}
+{'loss': 0.1986, 'grad_norm': 0.28802746534347534, 'learning_rate': 4.665063509461097e-05, 'epoch': 1.38}
+{'loss': 0.1877, 'grad_norm': 0.38902488350868225, 'learning_rate': 4.3835897408191516e-05, 'epoch': 1.66}
+{'loss': 0.1878, 'grad_norm': 0.4607071280479431, 'learning_rate': 4.0315013629830076e-05, 'epoch': 1.93}
+{'loss': 0.1553, 'grad_norm': 0.3646697998046875, 'learning_rate': 3.621997950501156e-05, 'epoch': 2.21}
+{'loss': 0.1086, 'grad_norm': 0.5515300631523132, 'learning_rate': 3.170431531901594e-05, 'epoch': 2.48}
+{'loss': 0.1386, 'grad_norm': 0.4232962429523468, 'learning_rate': 2.6937310516798275e-05, 'epoch': 2.76}
+{'loss': 0.1113, 'grad_norm': 0.39222803711891174, 'learning_rate': 2.2097677146869242e-05, 'epoch': 3.03}
+{'loss': 0.0657, 'grad_norm': 0.5203909277915955, 'learning_rate': 1.7366850057622175e-05, 'epoch': 3.31}
+{'loss': 0.0661, 'grad_norm': 0.4339427947998047, 'learning_rate': 1.2922185017584037e-05, 'epoch': 3.59}
+{'loss': 0.0527, 'grad_norm': 0.495731920003891, 'learning_rate': 8.930309757836517e-06, 'epoch': 3.86}
+{'loss': 0.0515, 'grad_norm': 0.5372505187988281, 'learning_rate': 5.5408772018959995e-06, 'epoch': 4.14}
+{'loss': 0.028, 'grad_norm': 0.17521604895591736, 'learning_rate': 2.8809550705835548e-06, 'epoch': 4.41}
+{'loss': 0.0272, 'grad_norm': 0.3892885744571686, 'learning_rate': 1.0502621921127776e-06, 'epoch': 4.69}
+{'loss': 0.0284, 'grad_norm': 0.5051921010017395, 'learning_rate': 1.1743010517085428e-07, 'epoch': 4.97}
+{'train_runtime': 5204.3891, 'train_samples_per_second': 0.557, 'train_steps_per_second': 0.035, 'train_loss': 0.22318974865807428, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =      4.9655
+  total_flos               = 414665582GF
+  train_loss               =      0.2232
+  train_runtime            =  1:26:44.38
+  train_samples_per_second =       0.557
+  train_steps_per_second   =       0.035
+09/08/2024 15:20:06 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 15:20:06 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 15:20:06 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 15:20:06 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/08/2024 15:24:01 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 15:24:06 - INFO - llamafactory.model.adapter - Loaded adapter(s): /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/finetuned_models_run3/CDCP_ari_llama-3-70b-Instruct-bnb-4bit
+09/08/2024 15:24:06 - INFO - llamafactory.model.loader - all params: 70,657,253,376
+              precision    recall  f1-score   support
+
+       N-Rel      0.981     0.987     0.984     10004
+         Rel      0.494     0.398     0.441       324
+
+    accuracy                          0.968     10328
+   macro avg      0.737     0.692     0.712     10328
+weighted avg      0.965     0.968     0.967     10328
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit ari 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/llama-3-70b-Instruct-bnb-4bit arc
+09/08/2024 15:35:21 - INFO - llamafactory.cli - Initializing distributed tasks at: 127.0.0.1:28733
+09/08/2024 15:35:31 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 15:35:31 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 15:35:31 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 15:35:31 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/08/2024 15:35:31 - WARNING - llamafactory.hparams.parser - `ddp_find_unused_parameters` needs to be set as False for LoRA in DDP training.
+09/08/2024 15:35:31 - INFO - llamafactory.hparams.parser - Process rank: 1, device: cuda:1, n_gpu: 1, distributed training: True, compute dtype: torch.float16
+09/08/2024 15:35:32 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 15:35:32 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/08/2024 15:35:32 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_arc_train.json...
+09/08/2024 15:35:33 - INFO - llamafactory.data.loader - Loading dataset /Utilisateurs/umushtaq/am_work/coling_2025/cdcp/datasets/CDCP_arc_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 1472, 527, 1101, 2728, 264, 1160, 315, 13840, 315, 5552, 5811, 6956, 304, 279, 1376, 25, 18305, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 5850, 320, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 5850, 61453, 320, 5775, 10807, 320, 396, 705, 2592, 10807, 320, 396, 595, 948, 4718, 3465, 374, 311, 49229, 1855, 6857, 315, 5552, 5811, 6956, 304, 279, 1160, 439, 3060, 330, 20489, 1, 477, 330, 68, 28580, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 12976, 4595, 11, 26549, 315, 3160, 220, 17, 11, 304, 2768, 4823, 3645, 25, 5324, 23013, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 23013, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 20489, 1, 477, 330, 68, 28580, 3343, 4815, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 16, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 16, 1822, 1741, 17, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 17, 1822, 1741, 18, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 18, 397, 14711, 5810, 374, 279, 1160, 315, 13840, 315, 5552, 5811, 6956, 304, 420, 14646, 25, 4416, 15, 11, 220, 16, 1145, 510, 17, 11, 220, 15, 5163, 128009, 128006, 78191, 128007, 271, 5018, 23013, 9962, 794, 4482, 20489, 498, 330, 20489, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. You are also given a list of pairs of related argument components in the form: [(target AC (int), source AC (int)), (target AC (int), source AC (int)),..., (target AC (int), source AC (int))]. Your task is to classify each pair of related argument components in the list as either "reason" or "evidence". You must return a list of argument relation types, strictly of length 2, in following JSON format: {"relation_types": ["component_type (str)", "component_type (str)"]} where each element "relation_type (str)" is replaced by either "reason" or "evidence". 
+
+### Here is the text: <AC1>State and local court rules sometimes make default judgments much more likely.</AC1><AC2> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC2><AC3> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC3>
+### Here is the list of pairs of related argument components in this paragraph: [[0, 1], [2, 0]]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"relation_types": ["reason", "reason"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 23013, 9962, 794, 4482, 20489, 498, 330, 20489, 93546, 128009]
+labels:
+{"relation_types": ["reason", "reason"]}<|eot_id|>
+09/08/2024 15:35:34 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 15:35:34 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 15:35:34 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/08/2024 15:35:34 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/08/2024 15:41:26 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 15:41:26 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 15:41:26 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 15:41:26 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 15:41:26 - INFO - llamafactory.model.model_utils.misc - Found linear modules: k_proj,gate_proj,v_proj,o_proj,up_proj,q_proj,down_proj
+09/08/2024 15:41:26 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/08/2024 15:41:26 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/08/2024 15:41:26 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/08/2024 15:41:26 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/08/2024 15:41:26 - INFO - llamafactory.model.model_utils.misc - Found linear modules: v_proj,o_proj,up_proj,gate_proj,k_proj,q_proj,down_proj
+09/08/2024 15:41:28 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/08/2024 15:41:28 - INFO - llamafactory.model.loader - trainable params: 103,546,880 || all params: 70,657,253,376 || trainable%: 0.1465
+09/08/2024 15:41:29 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+09/08/2024 15:41:29 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
