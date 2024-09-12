@@ -1,0 +1,35 @@
+0. Install LLamA Factory:
+
+%rm -rf LLaMA-Factory
+!git clone https://github.com/hiyouga/LLaMA-Factory.git
+%cd LLaMA-Factory
+%ls
+!pip install -e .[torch,bitsandbytes]
+
+!pip uninstall -y pydantic
+!pip install pydantic==1.10.9 # 
+
+!pip uninstall -y gradio
+!pip install gradio==3.48.0
+
+!pip uninstall -y bitsandbytes
+!pip install --upgrade bitsandbytes
+
+!pip install tqdm
+!pip install ipywidgets
+!pip install scikit-learn
+
+Optionally, upgrade transformers if you see an error.
+
+
+1. Choose the model you want to run.
+
+model names: "unsloth/gemma-2-9b-it-bnb-4bit" -- "unsloth/Qwen2-7B-Instruct-bnb-4bit" -- "unsloth/Phi-3-mini-4k-instruct-bnb-4bit" -- "unsloth/mistral-7b-instruct-v0.3-bnb-4bit"
+
+2. Replace the 'template' argument in the args dictionary in the PE_finetune.py (line 140 and line 175) like so: 
+
+'gemma' for gemma, 'qwen' for Qwen, 'phi' for Phi and 'mistral' for Mistral.
+
+3. For every model_name, run the three commands given below separated by the semi-colon (so that they run one after the other regardless of exit status)
+
+python3 PE_finetune.py <model_name> acc 1 essay ; python3 PE_finetune.py <model_name> ari 0 paragraph ; python3 PE_finetune.py <model_name> arc 0 paragraph
