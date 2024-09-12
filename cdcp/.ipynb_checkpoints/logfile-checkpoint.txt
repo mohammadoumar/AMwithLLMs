@@ -1,0 +1,121 @@
+Running CDCP_finetune.py with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit acc
+09/09/2024 16:21:11 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/09/2024 16:21:11 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: False, compute dtype: torch.float16
+09/09/2024 16:21:12 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/09/2024 16:21:12 - INFO - llamafactory.data.loader - Loading dataset /nfs/scratch/umushtaq/coling_2025/cdcp/datasets/CDCP_acc_train.json...
+training example:
+input_ids:
+[128000, 128006, 882, 128007, 271, 14711, 1472, 527, 459, 6335, 304, 14138, 26917, 13, 1472, 527, 2728, 264, 1495, 902, 5727, 49926, 5811, 6956, 44910, 555, 366, 1741, 1500, 1741, 29, 9681, 13, 4718, 3465, 374, 311, 49229, 1855, 5811, 3777, 304, 279, 1495, 439, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 1472, 2011, 471, 264, 1160, 315, 5811, 3777, 4595, 11, 26549, 315, 3160, 220, 18, 11, 304, 2768, 4823, 3645, 25, 5324, 8739, 9962, 794, 4482, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 11844, 330, 8739, 1857, 320, 496, 8, 93546, 1405, 1855, 2449, 330, 8739, 1857, 320, 496, 10143, 374, 12860, 555, 3060, 330, 34210, 498, 330, 35890, 498, 330, 16690, 498, 330, 1985, 65556, 1, 477, 330, 970, 3343, 4815, 14711, 5810, 374, 279, 1495, 25, 366, 1741, 16, 29, 1423, 323, 2254, 5590, 5718, 7170, 1304, 1670, 59358, 1790, 810, 4461, 4005, 1741, 16, 1822, 1741, 17, 29, 1789, 3187, 11, 994, 264, 1732, 889, 19755, 69944, 264, 11897, 374, 3309, 311, 2586, 311, 5590, 389, 264, 990, 1938, 11, 814, 1253, 387, 9770, 311, 5268, 1990, 264, 1670, 19971, 323, 872, 2683, 4005, 1741, 17, 1822, 1741, 18, 29, 358, 33147, 279, 356, 11960, 33, 311, 1505, 12659, 430, 21736, 38952, 45348, 520, 84783, 3115, 28743, 11, 81374, 11, 323, 43658, 11, 477, 40240, 449, 220, 11739, 17, 72, 4005, 1741, 18, 29, 128009, 128006, 78191, 128007, 271, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+### You are an expert in Argument Mining. You are given a text which contains numbered argument components enclosed by <AC></AC> tags. Your task is to classify each argument component in the text as either "fact", "policy", "reference", "testimony" or "value". You must return a list of argument component types, strictly of length 3, in following JSON format: {"component_types": ["component_type (str)", "component_type (str)", "component_type (str)"]} where each element "component_type (str)" is replaced by either "fact", "policy", "reference", "testimony" or "value". 
+
+### Here is the text: <AC1>State and local court rules sometimes make default judgments much more likely.</AC1><AC2> For example, when a person who allegedly owes a debt is told to come to court on a work day, they may be forced to choose between a default judgment and their job.</AC2><AC3> I urge the CFPB to find practices that involve scheduling hearings at inconvenient times unfair, deceptive, and abusive, or inconsistent with 1692i.</AC3><|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5018, 8739, 9962, 794, 4482, 970, 498, 330, 970, 498, 330, 35890, 93546, 128009]
+labels:
+{"component_types": ["value", "value", "policy"]}<|eot_id|>
+09/09/2024 16:21:13 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/09/2024 16:21:13 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/09/2024 16:21:33 - INFO - llamafactory.model.model_utils.checkpointing - Gradient checkpointing enabled.
+09/09/2024 16:21:33 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/09/2024 16:21:33 - INFO - llamafactory.model.adapter - Upcasting trainable params to float32.
+09/09/2024 16:21:33 - INFO - llamafactory.model.adapter - Fine-tuning method: LoRA
+09/09/2024 16:21:33 - INFO - llamafactory.model.model_utils.misc - Found linear modules: down_proj,v_proj,q_proj,o_proj,gate_proj,k_proj,up_proj
+09/09/2024 16:21:34 - INFO - llamafactory.model.loader - trainable params: 20,971,520 || all params: 8,051,232,768 || trainable%: 0.2605
+09/09/2024 16:21:35 - WARNING - llamafactory.train.callbacks - Previous trainer log in this folder will be deleted.
+09/09/2024 16:21:37 - INFO - llamafactory.train.trainer_utils - Using LoRA+ optimizer with loraplus lr ratio 16.00.
+{'loss': 0.4528, 'grad_norm': 1.3997589349746704, 'learning_rate': 1.25e-05, 'epoch': 0.14}
+{'loss': 0.2011, 'grad_norm': 0.7202951312065125, 'learning_rate': 2.6388888888888892e-05, 'epoch': 0.28}
+{'loss': 0.1622, 'grad_norm': 0.5170820951461792, 'learning_rate': 4.027777777777778e-05, 'epoch': 0.41}
+{'loss': 0.1455, 'grad_norm': 0.6996171474456787, 'learning_rate': 4.998942375205502e-05, 'epoch': 0.55}
+{'loss': 0.1291, 'grad_norm': 1.5045768022537231, 'learning_rate': 4.9801650402038555e-05, 'epoch': 0.69}
+{'loss': 0.1314, 'grad_norm': 0.8050339221954346, 'learning_rate': 4.938088021881233e-05, 'epoch': 0.83}
+{'loss': 0.1201, 'grad_norm': 0.6460157632827759, 'learning_rate': 4.873106608932585e-05, 'epoch': 0.97}
+{'loss': 0.0704, 'grad_norm': 0.8564806580543518, 'learning_rate': 4.785831263290449e-05, 'epoch': 1.1}
+{'loss': 0.0769, 'grad_norm': 1.7794405221939087, 'learning_rate': 4.6770818851962305e-05, 'epoch': 1.24}
+{'loss': 0.0942, 'grad_norm': 0.5160842537879944, 'learning_rate': 4.54788011072248e-05, 'epoch': 1.38}
+{'loss': 0.0881, 'grad_norm': 0.8846837878227234, 'learning_rate': 4.3994397141063734e-05, 'epoch': 1.52}
+{'loss': 0.0869, 'grad_norm': 0.8303022980690002, 'learning_rate': 4.233155205058811e-05, 'epoch': 1.66}
+{'loss': 0.0645, 'grad_norm': 0.5816922187805176, 'learning_rate': 4.05058872817065e-05, 'epoch': 1.79}
+{'loss': 0.091, 'grad_norm': 0.552050769329071, 'learning_rate': 3.8534553874884244e-05, 'epoch': 1.93}
+{'loss': 0.0555, 'grad_norm': 0.2712700366973877, 'learning_rate': 3.643607134126452e-05, 'epoch': 2.07}
+{'loss': 0.031, 'grad_norm': 0.6672087907791138, 'learning_rate': 3.423015368281711e-05, 'epoch': 2.21}
+{'loss': 0.0277, 'grad_norm': 0.6393688917160034, 'learning_rate': 3.193752419095239e-05, 'epoch': 2.34}
+{'loss': 0.0343, 'grad_norm': 1.2502342462539673, 'learning_rate': 2.957972076345817e-05, 'epoch': 2.48}
+{'loss': 0.0273, 'grad_norm': 0.49882057309150696, 'learning_rate': 2.717889356869146e-05, 'epoch': 2.62}
+{'loss': 0.0499, 'grad_norm': 0.5962091088294983, 'learning_rate': 2.475759695785054e-05, 'epoch': 2.76}
+{'loss': 0.0379, 'grad_norm': 0.18527407944202423, 'learning_rate': 2.2338577580188296e-05, 'epoch': 2.9}
+{'loss': 0.0322, 'grad_norm': 1.2369494438171387, 'learning_rate': 1.9944560691699057e-05, 'epoch': 3.03}
+{'loss': 0.0105, 'grad_norm': 0.16166874766349792, 'learning_rate': 1.7598036664782508e-05, 'epoch': 3.17}
+{'loss': 0.005, 'grad_norm': 0.034289754927158356, 'learning_rate': 1.532104970449999e-05, 'epoch': 3.31}
+{'loss': 0.0074, 'grad_norm': 0.22977153956890106, 'learning_rate': 1.313499075630899e-05, 'epoch': 3.45}
+{'loss': 0.0069, 'grad_norm': 0.3335634768009186, 'learning_rate': 1.1060396550785182e-05, 'epoch': 3.59}
+{'loss': 0.0092, 'grad_norm': 0.18871721625328064, 'learning_rate': 9.116756673187878e-06, 'epoch': 3.72}
+{'loss': 0.0054, 'grad_norm': 0.010563638992607594, 'learning_rate': 7.3223304703363135e-06, 'epoch': 3.86}
+{'loss': 0.0081, 'grad_norm': 0.021538345143198967, 'learning_rate': 5.693975514848271e-06, 'epoch': 4.0}
+{'loss': 0.0048, 'grad_norm': 0.01051558181643486, 'learning_rate': 4.24698923821803e-06, 'epoch': 4.14}
+{'loss': 0.0004, 'grad_norm': 0.008251120336353779, 'learning_rate': 2.9949652204972254e-06, 'epoch': 4.28}
+{'loss': 0.0043, 'grad_norm': 0.11000096797943115, 'learning_rate': 1.9496654866520414e-06, 'epoch': 4.41}
+{'loss': 0.001, 'grad_norm': 0.03345932438969612, 'learning_rate': 1.1209100092969244e-06, 'epoch': 4.55}
+{'loss': 0.0011, 'grad_norm': 0.04820537567138672, 'learning_rate': 5.164844558612131e-07, 'epoch': 4.69}
+{'loss': 0.0012, 'grad_norm': 0.009317612275481224, 'learning_rate': 1.4206704684953943e-07, 'epoch': 4.83}
+{'loss': 0.0008, 'grad_norm': 0.011186467483639717, 'learning_rate': 1.1752123193459197e-09, 'epoch': 4.97}
+{'train_runtime': 1733.9381, 'train_samples_per_second': 1.672, 'train_steps_per_second': 0.208, 'train_loss': 0.06322533228538102, 'epoch': 4.97}
+***** train metrics *****
+  epoch                    =     4.9655
+  total_flos               = 55401222GF
+  train_loss               =     0.0632
+  train_runtime            = 0:28:53.93
+  train_samples_per_second =      1.672
+  train_steps_per_second   =      0.208
+09/09/2024 16:50:56 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/09/2024 16:50:56 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/09/2024 16:50:56 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/09/2024 16:50:56 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/09/2024 16:51:12 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+09/09/2024 16:51:14 - INFO - llamafactory.model.adapter - Loaded adapter(s): /nfs/scratch/umushtaq/coling_2025/cdcp/finetuned_models/CDCP_acc_Meta-Llama-3.1-8B-Instruct-bnb-4bit
+09/09/2024 16:51:14 - INFO - llamafactory.model.loader - all params: 8,051,232,768
+              precision    recall  f1-score   support
+
+        fact      0.598     0.811     0.688       132
+      policy      0.916     0.922     0.919       153
+   reference      1.000     1.000     1.000         1
+   testimony      0.922     0.869     0.895       244
+       value      0.896     0.835     0.864       496
+
+    accuracy                          0.853      1026
+   macro avg      0.866     0.887     0.873      1026
+weighted avg      0.867     0.853     0.857      1026
+
+Successfully ran CDCP_finetune.py with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit acc 
+ 
+  *************** 
+
+Running CDCP_finetune.py with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit ari
+09/09/2024 16:56:14 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/09/2024 16:56:14 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: False, compute dtype: torch.float16
+09/09/2024 16:56:15 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/09/2024 16:56:15 - INFO - llamafactory.data.loader - Loading dataset /nfs/scratch/umushtaq/coling_2025/cdcp/datasets/CDCP_ari_train.json...
+09/09/2024 16:56:18 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/09/2024 16:56:18 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/09/2024 16:56:18 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/09/2024 16:56:18 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/09/2024 16:56:31 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.
+Error encountered with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit ari. Skipping to the next pair. 
+ 
+  ************* 
+
+Running CDCP_finetune.py with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit arc
+09/09/2024 16:57:40 - WARNING - llamafactory.hparams.parser - We recommend enable `upcast_layernorm` in quantized training.
+09/09/2024 16:57:40 - INFO - llamafactory.hparams.parser - Process rank: 0, device: cuda:0, n_gpu: 1, distributed training: False, compute dtype: torch.float16
+09/09/2024 16:57:42 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/09/2024 16:57:42 - INFO - llamafactory.data.loader - Loading dataset /nfs/scratch/umushtaq/coling_2025/cdcp/datasets/CDCP_arc_train.json...
+09/09/2024 16:57:44 - INFO - llamafactory.data.template - Replace eos token: <|eot_id|>
+09/09/2024 16:57:44 - WARNING - llamafactory.model.model_utils.quantization - `quantization_bit` will not affect on the PTQ-quantized models.
+09/09/2024 16:57:44 - INFO - llamafactory.model.model_utils.quantization - Loading ?-bit BITSANDBYTES-quantized model.
+09/09/2024 16:57:44 - INFO - llamafactory.model.patcher - Using KV cache for faster generation.
+09/09/2024 16:57:59 - INFO - llamafactory.model.model_utils.attention - Using torch SDPA for faster training and inference.

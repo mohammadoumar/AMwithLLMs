@@ -1,0 +1,6 @@
+Running CDCP_finetune.py with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit acc
+Error encountered with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit acc. Skipping to the next pair. 
+ 
+  ************* 
+
+Running CDCP_finetune.py with arguments: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit ari
