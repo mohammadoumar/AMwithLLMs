@@ -54,3 +54,4 @@ LLaMA-Factory/
 **/adapter_model.safetensors
 **/tokenizer.json
 **/optimizer.pt
+**/*.pyc
