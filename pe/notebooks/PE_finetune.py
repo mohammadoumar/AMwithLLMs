@@ -70,6 +70,7 @@ from utils.post_processing import *
 parser = argparse.ArgumentParser()
 
 parser.add_argument("model", help="The base model to fine-tune.", type=str)
+parser.add_argument("template", help="The template to use")
 # parser.add_argument("dataset", help="The dataset for fine-tune.", type=strm choices=["pe", "abstrct"])
 parser.add_argument("task", help="The pipeline task to execute.", type=str, choices=["acc", "ari", "arc"])
 parser.add_argument("tags", help="Include contextual tags.", type=int, choices=[0, 1])
@@ -77,7 +78,7 @@ parser.add_argument("context", help="Context of the task.", type=str, choices=["
 
 args = parser.parse_args()
 
-BASE_MODEL, TASK, TAGS, CONTEXT = args.model, args.task, args.tags, args.context
+BASE_MODEL, TEMPLATE, TASK, TAGS, CONTEXT = args.model, args.template, args.task, args.tags, args.context
 TAGS = "wtags" if TAGS == 1 else "wotags"
 
 ROOT_DIR = parent_dir #os.path.abspath(os.path.join(os.getcwd(), os.pardir))
@@ -137,7 +138,7 @@ args = dict(
   do_train=True,
   model_name_or_path=BASE_MODEL,         # use bnb-4bit-quantized Llama-3-8B-Instruct model
   dataset="persuasive_essays",           # use alpaca and identity datasets
-  template="llama3",                     # use llama3 prompt template
+  template=TEMPLATE,                     # use llama3 prompt template
   finetuning_type="lora",                # use LoRA adapters to save memory
   lora_target="all",                     # attach LoRA adapters to all linear layers
   output_dir=OUTPUT_DIR,                 # the path to save LoRA adapters
@@ -172,7 +173,7 @@ p.wait()
 args = dict(
   model_name_or_path=BASE_MODEL, # use bnb-4bit-quantized Llama-3-8B-Instruct model
   adapter_name_or_path=OUTPUT_DIR,            # load the saved LoRA adapters
-  template="llama3",                     # same to the one in training
+  template=TEMPLATE,                     # same to the one in training
   finetuning_type="lora",                  # same to the one in training
   quantization_bit=4,                    # load 4-bit quantized model
 )
